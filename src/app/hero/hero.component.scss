@@ -1,0 +1,136 @@
+@import "../variables.scss";
+
+
+.blurred-text{
+    filter: blur(6px);
+}
+
+.hero-title{
+    margin-bottom: 40px;
+}
+
+.hero-subtitle{
+    margin-bottom: 20px;
+}
+
+.hero-bg{
+    background: #0a0214;
+}
+
+.highlight{
+    color: $brand-primary;
+}
+
+.moon{
+    background-color: #090213;
+    position:relative;
+    /*padding: 10px;*/
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    box-shadow: 5px 0 10px 3px rgba(229,229,229,0),
+                0 0 10px 2px rgba(229,229,229,0),
+                5px 0 10px 3px rgba(229,229,229,0),
+                 0px 0 3px 2px rgba(229,229,229,0),
+                 5px 0 250px 100px rgba(229,229,229,0);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    transition: all 1s ease;
+  }
+
+  .moon-active{
+    background-color: #eeeeee;
+    box-shadow: 5px 0 10px 3px rgba(229,229,229,0.3),
+                0 0 10px 2px rgba(229,229,229,0.3),
+                5px 0 10px 3px rgba(229,229,229,0.3),
+                 0px 0 3px 2px rgba(229,229,229,0.3),
+                 5px 0 250px 100px rgba(229,229,229,0.3) !important;
+    
+  }
+
+  .moon-active::after{
+    opacity: 1 !important;
+    
+  }
+
+  .moon::after{
+    opacity: 0;
+    transition: all 1s ease;
+    content: "";
+    background-color: rgba(207, 207, 207, 0.81);
+    display: block;
+    position: absolute;
+    left:  260px;
+    top:  50px;
+    width: 40px;  
+    height: 40px;
+    border-radius:50%;
+    box-shadow: 3px 0 0 1px rgba(172, 172, 172, 0.51),
+                  7px 45px 0 -5px rgba(207, 207, 207, 0.81),
+                  9px 45px 0 -5px rgba(172, 172, 172, 0.51),
+                 35px 20px 0 -10px rgba(207, 207, 207, 0.81),
+                 37px 20px 0 -10px rgba(172, 172, 172, 0.51);
+  }
+
+.star-1{
+  position: relative;
+  background-color: #FFFDFD;
+  top: 50px;
+  left: -10px;
+  width:5px;
+  height:5px;
+  border-radius: 50%;
+  box-shadow: 0 0 1px 1px #FFFDFD,
+              -870px 50px 1px 0 #eaeaea,
+               420px -150px 1px -1px #ffffff,
+               -570px -50px 1px -1px #ffffff,
+               270px 410px 1px 0.11px #FFFDFD,
+               570px 230px 1px 0.11px #FFFDFD,
+               790px 300px 1px -0.6px #ffffff,
+               630px 10px 1px 0.11px #dcdcdc,
+               -930px 130px 1px 0.11px #f4f4f4,
+               0px -260px 1px -1px #e4e4e4,
+               -310px 550px 1px 0.11px #e5e5e5,
+              -1000px 500px 3px -1px #ffffff;
+  animation: pulsate 5s ease;
+  animation-iteration-count: infinite; 
+
+}
+.star-2{
+  position: absolute;
+  background-color: #dedede;
+  top: 100px;
+  left: -60px;
+  width:5px;
+  height:5px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px 1px #ffffff,
+              -409px 60px 1px 0.09px #ffffff,
+               155px 450px 0.5px 1px #ffffff,
+               -450px 300px 1px -1px #ffffff,
+               550px 300px 1px -1px #d9d9d9,
+               600px 490px 1px -1px #ffffff,
+              -50px 370px 1px -1px #dcdcdc,
+              -750px 320px 1px 1px #bbbbbb,
+              -900px -220px 1px 1px #e4e4e4,
+              800px 420px 1px 1px #e1e1e1,
+              -600px 240px 1px -1px #dadada,
+              -270px -190px 1px 0px #e2e2e2;
+              
+  animation: pulsate 7s ease;
+  animation-iteration-count: infinite; 
+
+}
+
+@keyframes pulsate  {
+    0% { opacity: 0.0; }
+    50% { opacity: 1.0; }
+    100% { opacity: 0.0; }
+}
+
+h1{
+    transition: all 1s ease;
+    color: #eeeeee;
+}
