@@ -1,16 +1,33 @@
 <div class="container-fluid hero-bg">
     <div class="container">
-        <div class="row" style="height: 90vh;">
-            <div class="col-md-6" style="display: flex; justify-content: center; align-items: left; flex-direction: column;">
+        <div class="row">
+            <div class="col-12">
+                <img class="img-fluid header-logo" [class.activeM]="currentMoon" src="logo.png"/>
+            </div>
+        </div>
+        <div class="row hero-row">
+            <div class="col-md-6 order-md-first motto-col" style="margin-bottom: 10px; margin-top: 10px;">
                 <h1 class="hero-title" [class.blurred-text]="currentMoon" (mouseover)="unblurMoon(false)">Lost in digital dillemas?</h1>
                 <h1 class="hero-subtitle" [class.blurred-text]="!currentMoon" (mouseover)="unblurMoon(true)">Emerge into the light with
                     <span class="highlight">Night Work IT</span> solutions.</h1>
+                <app-cta class="activeN" [class.activeM]="currentMoon"></app-cta>
             </div>
-            <div class="col-md-6" style="display: flex; justify-content: center; ">
+            <div class="col-md-6 order-first order-md-last" style="display: flex; justify-content: center; ">
                 <div class="moon" [class.moon-active]="currentMoon" style="flex-grow: 0; flex-shrink: 0;">
                     <div class="star-1"></div>
                     <div class="star-2"></div> 
                   </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="mouse_scroll" [class.activeM]="currentMoon">
+                    <div>
+                        <span class="m_scroll_arrows unu"></span>
+                        <span class="m_scroll_arrows doi"></span>
+                        <span class="m_scroll_arrows trei"></span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

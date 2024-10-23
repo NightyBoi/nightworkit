@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { delay, of } from 'rxjs';
+import { CtaComponent } from '../cta/cta.component';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [],
+  imports: [CtaComponent],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss'
 })
