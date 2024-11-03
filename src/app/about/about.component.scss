@@ -5,6 +5,12 @@
     
 }
 
+.about-wrapper{
+    padding: 15px; 
+    padding-right: 40px;
+    padding-top: 40px;
+}
+
 .about-border{
     border: 2px dashed rgba(114, 50, 198, 0.15);
     min-height: 30vh;
@@ -34,6 +40,24 @@
     width: 30%;
     
 }
+
+.img-fluid{
+    max-width: 100%;
+    height: auto;
+    transition: all 1s ease;
+}
+
+.about-img{
+    filter: grayscale(1);
+}
+
+@media only screen and (max-width: 768px) {
+    .about-wrapper{
+        padding-top: 5px;
+        padding-right: 15px;
+    }
+}
+
 
 @keyframes glitch-test {
     0% {
