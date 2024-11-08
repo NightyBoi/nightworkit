@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 id="services">Our Services</h1>
+                <p>Explore our wide range of IT solutions, designed to do more than just solve problems. We focus on creating impactful experiences that match your vision and help you achieve your goals.</p>
+                <div class="row" style="margin-bottom: 24px;">
+                    <div class="col-sm-6">
+                        <a href="#service"><button (click)="switchService(0)" class="service" [class.active]="activeIndex == 0">
+                            <h4>Web Design</h4>
+                            <p>
+                                Our web design turns ideas into engaging digital experiences. We blend creativity with usability.
+                            </p>
+                        </button></a>
+                    </div>
+                    <div class="col-sm-6 column-offset">
+                        <a href="#service"><button (click)="switchService(1)" class="service" [class.active]="activeIndex == 1">
+                            <h4>Web Development</h4>
+                            <p>
+                                At Night Work IT, we craft web experiences that do more than look good—they work hard for your business.
+                            </p>
+                        </button></a>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom: 24px;">
+                    <div class="col-sm-6">
+                        <a href="#service"><button (click)="switchService(2)" class="service" [class.active]="activeIndex == 2">
+                            <h4>E-commerce Solutions</h4>
+                            <p>
+                                Our E-commerce Solutions provide everything you need for a seamless, secure shopping experience.
+                            </p>
+                        </button></a>
+                    </div>
+                    <div class="col-sm-6 column-offset">
+                        <a href="#service"><button (click)="switchService(3)" class="service" [class.active]="activeIndex == 3">
+                            <h4>Website Maintenance and Support</h4>
+                            <p>
+                                Keeps your site secure, up-to-date, and running smoothly, so you can focus on your business while we handle updates.
+                            </p>
+                        </button></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <a href="#service"><button (click)="switchService(4)" class="service" [class.active]="activeIndex == 4">
+                            <h4>Custom Solutions</h4>
+                            <p>Don't see what you're looking for? Reach out, and let's see how we can help.</p>
+                        </button></a>
+                    </div>
+                </div>
+                
+            </div>
+            <div id="service" class="col-lg-6 service-info" [class.fade-in]="fadeIn" [class.fade-out]="fadeOut">
+                <img class="service-img" [src]="activeService.image_path" >
+                <h2 style="align-self: flex-start;">{{activeService.service}}</h2>
+                <div class="separator"></div>
+                <p>{{activeService.description_1}}</p>
+                <p>{{activeService.description_2}}</p>
+            </div>
+        </div>
+    </div>
+</div>

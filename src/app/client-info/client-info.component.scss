@@ -1,0 +1,26 @@
+@import "../variables.scss";
+
+.container-fluid{
+    background-color: $brand-primary;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.title{
+    font-weight: 700;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    color: #ececec;
+    margin: 16px 0;
+}
+
+.comment{
+    font-style: italic;
+    font-size: .8rem;
+}

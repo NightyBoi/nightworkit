@@ -1,13 +1,19 @@
-<div class="container-fluid" style="background: #0a0214; padding-bottom: 30px;">
+<div class="container-fluid" style="background: #0a0214; padding-bottom: 30px; padding-top: 60px; margin-top: -2px;">
     <div class="container">
-        <div class="row" style="padding-top: 20px; padding-bottom: 20px;">
-            <div class="col-12">
-                <h1 style="text-align: center; color: white;">Take a look at our process.</h1>
-                <p style="text-align: center; color: white;">Click the highlighted planet to embark on your journey with us. Explore each phase of our workflow as you navigate through the planets, discovering what it’s like to work with our team. Reach the moon to see where we’ll take your project — to new heights!</p>
+        <div class="row ourway-row">
+            <div class="col-12" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
+                <h1 style="text-align: center; color: #ececec; margin-bottom: 20px;">Take a look at our process.</h1>
+                @if (!isPhone) {
+                    <p style="text-align: center; color: #ececec;">Click the highlighted planet to embark on your journey with us. Explore each phase of our workflow as you navigate through the planets, discovering what it’s like to work with our team. Reach the moon to see where we’ll take your project — to new heights!</p>
+                }
             </div>
         </div>
     </div>
-    <app-ourway></app-ourway>
+    @if (!isPhone) {
+        <app-ourway></app-ourway>
+    }@else {
+        <app-ourway-mobile></app-ourway-mobile>
+    }
     
 </div>
 

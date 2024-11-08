@@ -1,0 +1,57 @@
+<!-- Slider main container -->
+<div class="swiper" style="margin-top: 60px;">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="swiper-slide" [class.line-vanish]="activeIndex != 0">
+        <div class="slide-inner">
+            <div class="marker-border" [class.vanish-border]="activeIndex != 0">
+              <div class="marker-fill" [class.vanish]="activeIndex != 0"></div>
+            </div>
+            <h3 class="slide-title">Contact us</h3>
+            <p class="slide-description">Ready to bring your vision to life? Whether it's a detailed plan or a fresh idea, we're excited to hear from you. Just fill out our form, call, or email us and we'll respond quickly so we can start turning your goals into reality.</p>
+        </div>
+      </div>
+      <div class="swiper-slide" [class.line-vanish]="activeIndex != 1">
+        <div class="slide-inner">
+            <div class="marker-border" [class.vanish-border]="activeIndex != 1">
+              <div class="marker-fill" [class.vanish]="activeIndex != 1"></div>
+            </div>
+            <h3 class="slide-title">Schedule a Meeting</h3>
+            <p class="slide-description">After receiving your inquiry, we'll schedule a virtual or in-person meeting to learn about your project, understand your needs, and explore how we can best support you.</p>
+        </div>
+      </div>
+      <div class="swiper-slide" [class.line-vanish]="activeIndex != 2">
+        <div class="slide-inner">
+            <div class="marker-border" [class.vanish-border]="activeIndex != 2">
+              <div class="marker-fill" [class.vanish]="activeIndex != 2"></div>
+            </div>
+            <h3 class="slide-title">Analyze and Brainstorm</h3>
+            <p class="slide-description">After our initial meeting, our team will dive deep into analyzing your requirements. We’ll brainstorm creative and effective solutions tailored to your project. This collaborative phase ensures that all ideas are explored, and the best strategies are developed to meet your objectives.</p>
+        </div>
+      </div>
+      <div class="swiper-slide" [class.line-vanish]="activeIndex != 3">
+        <div class="slide-inner">
+            <div class="marker-border" [class.vanish-border]="activeIndex != 3">
+              <div class="marker-fill" [class.vanish]="activeIndex != 3"></div>
+            </div>
+            <h3 class="slide-title">Development and Testing</h3>
+            <p class="slide-description">With a solid plan in place, we move into the development phase. Our skilled developers will bring your project to life, ensuring that every aspect is crafted with precision. Rigorous testing is conducted throughout this phase to ensure functionality, usability, and performance meet the highest standards.</p>
+        </div>
+      </div>
+      <div class="swiper-slide" [class.line-vanish]="activeIndex != 4">
+        <div class="slide-inner">
+            <div class="marker-border" [class.vanish-border]="activeIndex != 4">
+              <div class="marker-fill" [class.vanish]="activeIndex != 4"></div>
+            </div>
+            <h3 class="slide-title">Take your project to the moon!</h3>
+            <p class="slide-description">The final step is launching your project. We'll deploy it seamlessly, making sure everything runs smoothly from day one.</p>
+        </div>
+      </div>
+    </div>
+    <!-- If we need pagination -->
+    <div class="swiper-pagination"></div>
+  
+    <!-- If we need scrollbar -->
+    <div class="swiper-scrollbar"></div>
+  </div>

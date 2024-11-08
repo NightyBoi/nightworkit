@@ -1,0 +1,115 @@
+@import '../variables.scss';
+
+.container-fluid{
+    // background: rgb(14,14,14);
+    // background: linear-gradient(135deg, rgba(14,14,14,1) 0%, rgba(5,5,5,1) 100%);
+    background: #0a0214;
+    padding-top: 60px;
+    padding-bottom: 24px;
+}
+
+h1, h2, h4{
+    color: #ececec;
+}
+
+p{
+    color: #bbbbbb;
+    text-align: left;
+}
+
+a{
+    text-decoration: none;
+}
+
+.service{
+    max-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    background-color: #1c1c1c57;
+    border: #1b1b1b 1px solid;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 16px;
+    transition: all .3s ease;
+}
+
+.service p{
+    font-size: .9rem;
+    margin-bottom: 0;
+}
+
+.service h4{
+    text-align: left;
+}
+
+.active{
+    border: $brand-primary 1px solid;
+}
+
+.service-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+}
+
+.column-offset{
+    margin-top: 0;
+}
+
+.service-info p{
+    text-align: justify;
+}
+
+.service-info h2{
+    margin-bottom: 0;
+    margin-top: 24px;
+}
+
+.service-img{
+    max-width: 80%;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.separator{
+    background-color: $brand-primary;
+    background: linear-gradient(90deg, $brand-primary 0%, $brand-secondary 100%);
+    position: relative;
+    height: 3px;
+    width: 20%;
+    align-self: flex-start;
+    margin-bottom: 16px;
+}
+
+@media only screen and (max-width: 575px) {
+    .column-offset{
+        margin-top: 24px;
+    }
+
+    .service-img{
+        max-width: 90%;
+        width: 90%;
+    }
+}
+
+.fade-out {
+    animation: fadeOut .2s ease-out forwards;
+  }
+  
+  .fade-in {
+    animation: fadeIn .2s ease-in forwards;
+  }
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }

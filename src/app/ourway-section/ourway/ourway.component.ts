@@ -321,21 +321,21 @@ export class OurwayComponent implements OnInit {
 
   initExternal(){
     this.manager.onStart = (url, itemsLoaded, itemsTotal) => {
-      console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+      //console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
     };
   
     this.manager.onLoad = () => {
       this.isLoaded = true;
       this.loadScene.remove(this.loadingObj);
       this.availablePlanets.push(this.planets.find((element) => element.name == 'planet1'));
-      console.log( 'Loading complete!');
+      //console.log( 'Loading complete!');
       this.mainScene = this.scene;
     };
   
     this.manager.onProgress = ( url, itemsLoaded, itemsTotal ) => {
       this.fillElem.nativeElement.style.width = itemsLoaded / itemsTotal * 100 + "%";
       this.loadLabelElem.nativeElement.innerText = "Loading... (" + itemsLoaded + " of " + itemsTotal + " objects)";
-      console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+      //console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
     };
 
     this.loader.load('low_poly_earth.gltf', (gltf) => {

@@ -2,7 +2,6 @@
 
 .about-bg{
     background: #0a0214;
-    
 }
 
 .about-wrapper{
@@ -17,12 +16,12 @@
 }
 
 .about-title{
-    color: white;
+    color: #ececec;
     margin-bottom: 0;
 }
 
 .about-p{
-    color: white;
+    color: #ececec;
     text-align: justify;
     margin-top: 20px;
 }
@@ -33,12 +32,11 @@
 }
 
 .separator{
-     background-color: $brand-primary;
-     background: linear-gradient(90deg, $brand-primary 0%, $brand-secondary 100%);
+    background-color: $brand-primary;
+    background: linear-gradient(90deg, $brand-primary 0%, $brand-secondary 100%);
     position: relative;
     height: 3px;
     width: 30%;
-    
 }
 
 .img-fluid{
