@@ -7,11 +7,13 @@ import { OurwaySectionComponent } from './ourway-section/ourway-section.componen
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { ClientInfoComponent } from './client-info/client-info.component';
 import { ServicesComponent } from './services/services.component';
+import { ContactComponent } from './contact/contact.component';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeroComponent, TechnologiesComponent, AboutComponent, OurwaySectionComponent, ClientInfoComponent, ServicesComponent],
+  imports: [HeroComponent, TechnologiesComponent, AboutComponent, OurwaySectionComponent, ClientInfoComponent, ServicesComponent, ContactComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

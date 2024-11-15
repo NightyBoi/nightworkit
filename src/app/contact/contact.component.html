@@ -1,0 +1,54 @@
+<div class="container-fluid" id="contact-us">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 d-none d-lg-block" style="padding-right: 40px;">
+                <img class="contact-img" src="stars.jpg">
+            </div>
+            <div class="col-lg-6 col-form">
+                <h1 style="margin-bottom: 0;">Let's get started</h1>
+                <div class="separator"></div>
+                <p>Contact us for a free consultation call or chat, and let's start turning your vision into reality.</p>
+
+                <form #contactForm="ngForm" (ngSubmit)="formSubmit(contactForm, $event)">
+                    <div class="row" style="margin-bottom: 0;">
+                        <div class="col-md-6" style="margin-bottom: 24px">
+                            <input required class="form-input" type="text" name="first_name" placeholder="First name" [(ngModel)]="contactDetails.first_name">
+                        </div>
+                        <div class="col-md-6" style="margin-bottom: 24px">
+                            <input required class="form-input" type="text" name="last_name" placeholder="Last name" [(ngModel)]="contactDetails.last_name">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-12">
+                            <input required class="form-input" type="email" name="email" placeholder="E-Mail" [(ngModel)]="contactDetails.email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <select required class="form-input" name="project_length" [(ngModel)]="contactDetails.projectLength">
+                                <option value="">Project length</option>
+                                <option value="idk">I don't know</option>
+                                <option value="1-3">1-3 months</option>
+                                <option value="3-6">3-6 months</option>
+                                <option value="6+">6+ months</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 8px;">
+                        <div class="col-12">
+                            <textarea required rows="4" class="form-input" name="message" placeholder="Your message" [(ngModel)]="contactDetails.message"></textarea>
+                        </div>
+                    </div>
+                    <p style="margin-bottom: 8px;">In a universe of endless possibilities, finding the right path can be daunting. Let us be your guiding star.</p>
+                    <div class="send-button">
+                        <button type="submit" class="controls testing">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

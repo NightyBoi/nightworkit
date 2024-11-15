@@ -19,7 +19,7 @@ export class HeroComponent implements OnInit {
 
   ngOnInit(): void {
       of(false)
-      .pipe(delay(3500))
+      .pipe(delay(2500))
       .subscribe(
         response => {
           if(!this.moonChanged) {

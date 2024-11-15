@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background: #0a0214; padding-bottom: 30px; padding-top: 60px; margin-top: -2px;">
+<div class="container-fluid" style="background: #0a0214; padding-bottom: 30px; padding-top: 60px; margin-top: -2px; margin-bottom: -1px;">
     <div class="container">
         <div class="row ourway-row">
             <div class="col-12" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
@@ -9,12 +9,12 @@
             </div>
         </div>
     </div>
-    @if (!isPhone) {
-        <app-ourway></app-ourway>
-    }@else {
-        <app-ourway-mobile></app-ourway-mobile>
+    @if (isPhone) {
+        <app-ourway-mobile></app-ourway-mobile> 
     }
     
 </div>
 
-
+    @if (!isPhone) {
+        <app-ourway></app-ourway>
+    }

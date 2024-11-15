@@ -37,7 +37,7 @@ export class OurwayComponent implements OnInit {
   loadScene = new THREE.Scene();
   mainScene = new THREE.Scene();
 
-  cameraView = 40;
+  cameraView = 45;
   containerWidth!: number;
   aspect!: number;
   camera!: THREE.OrthographicCamera;
@@ -176,11 +176,11 @@ export class OurwayComponent implements OnInit {
     const containerStyles = getComputedStyle(this.container.nativeElement);
     this.containerWidth = this.container.nativeElement.clientWidth - parseFloat(containerStyles.paddingLeft) - parseFloat(containerStyles.paddingRight);
     window.addEventListener('resize', () => this.onResize());
-    this.aspect = this.containerWidth / 880 * 2.2;
+    this.aspect = this.containerWidth / 880 * 1.75;
     this.camera = new THREE.OrthographicCamera(this.aspect * this.cameraView / -2, this.aspect * this.cameraView / 2, this.cameraView / 2, this.cameraView / -2, 0.1, 1000);
     this.renderScene = new RenderPass(this.scene, this.camera);
     this.bloomPass = new UnrealBloomPass(
-      new THREE.Vector2(this.containerWidth, 400),
+      new THREE.Vector2(this.containerWidth, 500),
       1.6,
       0.1,
       0.1
@@ -212,7 +212,7 @@ export class OurwayComponent implements OnInit {
     this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas.nativeElement, antialias: true });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     //this.renderer.setSize(window.innerWidth, 400);
-    this.renderer.setSize(this.containerWidth, 400);
+    this.renderer.setSize(this.containerWidth, 500);
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1;
   }
@@ -266,18 +266,18 @@ export class OurwayComponent implements OnInit {
     this.scene.add(this.resetObj);
 
     this.prevObj = new CSS2DObject(this.buttonPrev.nativeElement);
-    this.prevObj.position.set(20, 15, 0);
+    this.prevObj.position.set(22, 15, 0);
     this.prevObj.center.set(0, 0);
     this.prevObj.layers.set(0);
     this.scene.add(this.prevObj);
 
     this.nextObj = new CSS2DObject(this.buttonNext.nativeElement);
-    this.nextObj.position.set(20, 15, 0);
+    this.nextObj.position.set(22, 15, 0);
     this.nextObj.center.set(0, 0);
     this.nextObj.layers.set(0);
     this.scene.add(this.nextObj);
 
-    this.labelRenderer.setSize(this.containerWidth, 400);
+    this.labelRenderer.setSize(this.containerWidth, 500);
     this.labelRenderer.domElement.style.position = 'absolute';
     
     // Position the labelRenderer to align with the canvas
@@ -409,7 +409,7 @@ export class OurwayComponent implements OnInit {
 
   initPostProcessing(){
     this.composer = new EffectComposer(this.renderer);
-    this.composer.setSize(this.containerWidth, 400);
+    this.composer.setSize(this.containerWidth, 500);
     this.composer.addPass(this.renderScene);
     this.composer.addPass(this.bloomPass);
   }
@@ -723,29 +723,29 @@ export class OurwayComponent implements OnInit {
     this.buttonReset.nativeElement.style.opacity = 1;
 
     if (tempObj.name != 'planet1' && tempObj.name != 'moon') {
-        this.prevObj.position.set(tempPos.x - 3.5, tempPos.y - 4, tempPos.z);
+        this.prevObj.position.set(tempPos.x - 3.2, tempPos.y - 4, tempPos.z);
         this.buttonPrev.nativeElement.style.opacity = 1;
 
-        this.nextObj.position.set(tempPos.x - 0.14, tempPos.y - 4, tempPos.z);
+        this.nextObj.position.set(tempPos.x , tempPos.y - 4, tempPos.z);
         this.buttonNext.nativeElement.style.opacity = 1;
 
         if (tempObj.name == 'planet2') {
-            this.labelObj2.position.set(tempPos.x + 5, tempPos.y + 3.15, tempPos.z);
+            this.labelObj2.position.set(tempPos.x + 5, tempPos.y + 2.65, tempPos.z);
         } else if (tempObj.name == 'planet3') {
-            this.labelObj3.position.set(tempPos.x + 5, tempPos.y + 3.15, tempPos.z);
+            this.labelObj3.position.set(tempPos.x + 5, tempPos.y + 2.65, tempPos.z);
         } else if (tempObj.name == 'earth') {
-            this.labelObj4.position.set(tempPos.x + 5, tempPos.y + 3.15, tempPos.z);
+            this.labelObj4.position.set(tempPos.x + 5, tempPos.y + 2.65, tempPos.z);
         }
 
     } else if (tempObj.name == 'planet1') {
-        this.labelObj.position.set(tempPos.x + 5, tempPos.y + 3.15, tempPos.z);
+        this.labelObj.position.set(tempPos.x + 5, tempPos.y + 2.65, tempPos.z);
 
-        this.nextObj.position.set(tempPos.x - 1.88, tempPos.y - 4, tempPos.z);
+        this.nextObj.position.set(tempPos.x - 1.58, tempPos.y - 4, tempPos.z);
         this.buttonNext.nativeElement.style.opacity = 1;
     } else if (tempObj.name == 'moon') {
-        this.labelObj5.position.set(tempPos.x + 5, tempPos.y + 2.2, tempPos.z);
+        this.labelObj5.position.set(tempPos.x + 5, tempPos.y + 1.7, tempPos.z);
 
-        this.prevObj.position.set(tempPos.x - 1.88, tempPos.y - 4, tempPos.z);
+        this.prevObj.position.set(tempPos.x - 1.58, tempPos.y - 4, tempPos.z);
         this.buttonPrev.nativeElement.style.opacity = 1;
     }
   }
@@ -824,10 +824,10 @@ onResize() {
     const containerStyles = getComputedStyle(this.container.nativeElement);
     this.containerWidth = this.container.nativeElement.clientWidth - parseFloat(containerStyles.paddingLeft) - parseFloat(containerStyles.paddingRight);
     // Update renderer size
-    this.renderer.setSize(this.containerWidth, 400);
-    this.labelRenderer.setSize(this.containerWidth, 400);
+    this.renderer.setSize(this.containerWidth, 500);
+    this.labelRenderer.setSize(this.containerWidth, 500);
 
-    this.aspect = this.containerWidth / 880 * 2.2;
+    this.aspect = this.containerWidth / 880 * 1.75;
 
     // Update camera properties
 
@@ -838,7 +838,7 @@ onResize() {
      this.camera.updateProjectionMatrix();
 
     // Update composer size if using post-processing
-    this.composer.setSize(this.containerWidth, 400);
+    this.composer.setSize(this.containerWidth, 500);
   }
 
   getSprite({ color, opacity, pos, size }:{color: THREE.Color, opacity: number, pos: THREE.Vector3, size: number}) {
