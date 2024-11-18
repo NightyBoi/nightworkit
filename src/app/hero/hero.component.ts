@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { delay, of } from 'rxjs';
 import { CtaComponent } from '../cta/cta.component';
 import { StateManagerService } from '../state-manager.service';
@@ -14,20 +14,26 @@ export class HeroComponent implements OnInit {
 
   currentMoon: boolean = false;
   moonChanged: boolean = false;
+  @Input() isPhone: boolean = false;
 
   constructor(private stateManager: StateManagerService){}
 
   ngOnInit(): void {
-      of(false)
-      .pipe(delay(2500))
-      .subscribe(
-        response => {
-          if(!this.moonChanged) {
-            this.stateManager.setMoon(true);
-            this.unblurMoon(true);
+      if(!this.isPhone){
+        of(false)
+        .pipe(delay(2000))
+        .subscribe(
+          response => {
+            if(!this.moonChanged) {
+              this.stateManager.setMoon(true);
+              this.unblurMoon(true);
+            }
           }
-        }
-      )
+        )
+      }else{
+        this.stateManager.setMoon(true);
+        this.unblurMoon(true);
+      }
   }
 
   unblurMoon(moonBlurred: boolean){

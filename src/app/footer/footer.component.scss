@@ -1,3 +1,38 @@
 .container-fluid{
-    height: 50vh;
+    background-color: #1c1c1c57;
+    padding-top: 60px;
+}
+
+.contact-header{
+    color: #ececec;
+    margin-bottom: 16px;
+    font-size: calc(1.275rem + 0.3vw);
+    font-weight: 500;
+}
+
+p{
+    color: #cccccc;
+}
+
+.linked{
+    max-width: 26px;
+    filter: none;
+}
+
+.linked:hover{
+    filter: brightness(0) saturate(100%) invert(85%) sepia(10%) saturate(117%) hue-rotate(256deg) brightness(108%) contrast(88%);
+}
+
+.copyright{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .9rem;
+    padding-top: 40px;
+}
+
+@media (min-width: 1200px) {
+    .contact-header {
+        font-size: 1.5rem;
+    }
 }

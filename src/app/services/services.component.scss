@@ -12,6 +12,11 @@ h1, h2, h4{
     color: #ececec;
 }
 
+.service-titles{
+    font-size: calc(1.275rem + 0.3vw);
+    text-align: left;
+}
+
 p{
     color: #bbbbbb;
     text-align: left;
@@ -83,6 +88,12 @@ a{
     width: 20%;
     align-self: flex-start;
     margin-bottom: 16px;
+}
+
+@media (min-width: 1200px) {
+    .service-titles {
+        font-size: 1.5rem;
+    }
 }
 
 @media only screen and (max-width: 575px) {

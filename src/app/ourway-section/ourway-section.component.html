@@ -10,11 +10,15 @@
         </div>
     </div>
     @if (isPhone) {
-        <app-ourway-mobile></app-ourway-mobile> 
+        @defer () {
+            <app-ourway-mobile></app-ourway-mobile> 
+        }
     }
     
 </div>
 
     @if (!isPhone) {
-        <app-ourway></app-ourway>
+        @defer () {
+            <app-ourway></app-ourway>
+        }
     }

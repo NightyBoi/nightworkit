@@ -1,5 +1,9 @@
 @import "../variables.scss";
 
+.container-fluid{
+    padding-bottom: 80px;
+}
+
 .contact-img{
     max-width: 100%;
 }
@@ -14,6 +18,17 @@ h1{
 
 form .row{
     margin-bottom: 24px;
+}
+
+.invalid{
+    border-color: red !important;
+}
+
+.invalidp{
+    color: red;
+    margin-bottom: 0;
+    margin-top: 8px;
+    font-size: .9rem;
 }
 
 ::placeholder{
@@ -41,6 +56,20 @@ textarea::-webkit-resizer {
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
+}
+
+.success-message{
+    color: green;
+    margin-bottom: 0;
+}
+
+.failure-message{
+    color: red;
+    margin-bottom: 0;
+}
+
+.link{
+    color: $brand-primary;
 }
 
 .separator{
@@ -98,7 +127,7 @@ form{
     background: none;
     border: none;
     outline: none;
-    margin-top: 10px;
+    margin-top: 0;
     padding: 8px 30px;
     font-size: 1em;
     letter-spacing: .35em;
@@ -117,4 +146,13 @@ form{
 .send-button{
     display: flex;
     justify-content: flex-start;
+    align-items: center;
+    flex-grow: 0;
+    padding-top: 10px;
+}
+
+.spinner{
+    display: flex;
+    justify-content: center;
+    margin: -75px -30px;
 }

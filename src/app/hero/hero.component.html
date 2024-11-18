@@ -1,13 +1,13 @@
 <div class="container-fluid hero-bg">
-    <div class="container">
+    <div class="container phone-scale">
         <div class="row">
             <div class="col-12">
-                <img class="img-fluid header-logo" [class.activeM]="currentMoon" src="logo.png"/>
+                <img class="img-fluid header-logo" alt="Night Work IT Logo white" [class.activeM]="currentMoon" src="logo.png"/>
             </div>
         </div>
         <div class="row hero-row">
             <div class="col-md-6 order-md-first motto-col" style="margin-bottom: 10px; margin-top: 10px;">
-                <h1 class="hero-title" [class.blurred-text]="currentMoon" (mouseover)="unblurMoon(false)">Lost in digital dillemas?</h1>
+                <h1 class="hero-title" [class.blurred-text]="currentMoon" (mouseover)="unblurMoon(false)">Lost in digital dilemmas?</h1>
                 <h1 class="hero-subtitle" [class.blurred-text]="!currentMoon" (mouseover)="unblurMoon(true)">Emerge into the light with
                     <span class="highlight">Night Work IT</span> solutions.</h1>
                 <app-cta class="activeN" [class.activeM]="currentMoon"></app-cta>

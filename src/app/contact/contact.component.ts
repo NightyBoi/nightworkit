@@ -18,23 +18,37 @@ export class ContactComponent {
     message: ''
   }
 
-  formSubmit(form: NgForm, e: Event){
-    if(form.valid){
-      console.log(e.target);
+  submitted = false;
+  validSubmit = false;
+  success = false;
+  error = false;
 
+  formSubmit(form: NgForm, e: Event){
+    this.submitted = true;
+
+    if(form.valid){
+      console.log(this.contactDetails);
+      this.success = false;
+      this.error = false;
+      this.validSubmit = true;
       
-      // emailjs
-      // .sendForm('service_aiq89ai', 'template_cjgikla', e.target as HTMLFormElement, {
-      //   publicKey: 'XARZv932EpS35tOVv',
-      // })
-      // .then(
-      //   () => {
-      //     console.log('SUCCESS!');
-      //   },
-      //   (error) => {
-      //     console.log('FAILED...', (error as EmailJSResponseStatus).text);
-      //   },
-      // );
+      emailjs
+      .sendForm('service_aiq89ai', 'template_cjgikla', e.target as HTMLFormElement, {
+        publicKey: 'XARZv932EpS35tOVv',
+      })
+      .then(
+        () => {
+          this.validSubmit = false;
+          this.success = true;
+          form.reset();
+          this.contactDetails.projectLength = '';
+          console.log('SUCCESS!');
+        },
+        (error) => {
+          this.error = true;
+          console.log('FAILED...', (error as EmailJSResponseStatus).text);
+        },
+      );
     }
   }
 

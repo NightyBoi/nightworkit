@@ -6,6 +6,7 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as TWEEN from '@tweenjs/tween.js';
+import { StateManagerService } from '../../state-manager.service';
 
 @Component({
   selector: 'app-ourway',
@@ -33,9 +34,14 @@ export class OurwayComponent implements OnInit {
   @ViewChild('loadingFill', {static: true}) fillElem!: ElementRef;
   @ViewChild('loadingLabel', {static: true}) loadLabelElem!: ElementRef;
 
+  isMediumScreen = false;
+
   scene = new THREE.Scene();
   loadScene = new THREE.Scene();
   mainScene = new THREE.Scene();
+
+  singleButtonPos = {x: -1.58, y: -4, z: 0};
+  duoButtonPos = [{x: -3.2, y: -4, z: 0}, {x: 0, y: -4, z: 0}];
 
   cameraView = 45;
   containerWidth!: number;
@@ -121,6 +127,16 @@ export class OurwayComponent implements OnInit {
   // Raycasting
   raycaster = new THREE.Raycaster();
   pointer = new THREE.Vector2();
+
+  constructor(private stateManager: StateManagerService){
+    this.isMediumScreen = stateManager.getMediumScreen();
+    if(this.isMediumScreen){
+      this.cameraView = 60;
+
+      this.singleButtonPos = {x: -2.1, y: -5, z: 0};
+      this.duoButtonPos = [{x: -2.1, y: -4, z: 0}, {x: -2.1, y: -5.5, z: 0}];
+    }
+  }
 
   onPointerMove(event: any) {
     // Get the bounding rectangle of the canvas
@@ -723,10 +739,10 @@ export class OurwayComponent implements OnInit {
     this.buttonReset.nativeElement.style.opacity = 1;
 
     if (tempObj.name != 'planet1' && tempObj.name != 'moon') {
-        this.prevObj.position.set(tempPos.x - 3.2, tempPos.y - 4, tempPos.z);
+        this.prevObj.position.set(tempPos.x + this.duoButtonPos[0].x, tempPos.y + this.duoButtonPos[0].y, tempPos.z);
         this.buttonPrev.nativeElement.style.opacity = 1;
 
-        this.nextObj.position.set(tempPos.x , tempPos.y - 4, tempPos.z);
+        this.nextObj.position.set(tempPos.x + this.duoButtonPos[1].x , tempPos.y + this.duoButtonPos[1].y, tempPos.z);
         this.buttonNext.nativeElement.style.opacity = 1;
 
         if (tempObj.name == 'planet2') {
@@ -740,12 +756,12 @@ export class OurwayComponent implements OnInit {
     } else if (tempObj.name == 'planet1') {
         this.labelObj.position.set(tempPos.x + 5, tempPos.y + 2.65, tempPos.z);
 
-        this.nextObj.position.set(tempPos.x - 1.58, tempPos.y - 4, tempPos.z);
+        this.nextObj.position.set(tempPos.x + this.singleButtonPos.x, tempPos.y + this.singleButtonPos.y, tempPos.z + this.singleButtonPos.z);
         this.buttonNext.nativeElement.style.opacity = 1;
     } else if (tempObj.name == 'moon') {
         this.labelObj5.position.set(tempPos.x + 5, tempPos.y + 1.7, tempPos.z);
 
-        this.prevObj.position.set(tempPos.x - 1.58, tempPos.y - 4, tempPos.z);
+        this.prevObj.position.set(tempPos.x + this.singleButtonPos.x, tempPos.y + this.singleButtonPos.y, tempPos.z + this.singleButtonPos.z);
         this.buttonPrev.nativeElement.style.opacity = 1;
     }
   }

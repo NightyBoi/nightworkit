@@ -39,6 +39,10 @@
     background: #0a0214;
 }
 
+.phone-scale{
+  height: 100%;
+}
+
 .highlight{
     color: $brand-primary;
 }
@@ -257,6 +261,13 @@
 
 
 @media only screen and (max-width: 768px) {
+
+  .phone-scale{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+  }
 
   .header-logo{
     margin-left: 15px;

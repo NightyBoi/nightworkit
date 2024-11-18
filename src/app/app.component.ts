@@ -9,6 +9,7 @@ import { ClientInfoComponent } from './client-info/client-info.component';
 import { ServicesComponent } from './services/services.component';
 import { ContactComponent } from './contact/contact.component';
 import { FooterComponent } from './footer/footer.component';
+import { StateManagerService } from './state-manager.service';
 
 @Component({
   selector: 'app-root',
@@ -21,12 +22,16 @@ export class AppComponent {
   title = 'official';
 
   isPhone: boolean = false;
+  isMediumScreen: boolean = false;
 
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor(private breakpointObserver: BreakpointObserver, private StateManager: StateManagerService) {
     this.breakpointObserver.observe([
-      '(max-width: 767px)' // Phone
+      '(max-width: 767px)', // Phone
+      '(max-width: 1000px) and (min-width: 768px)' // Table and Medium Screens
     ]).subscribe((state: BreakpointState) => {
       this.isPhone = state.breakpoints['(max-width: 767px)'] || false;
+      this.isMediumScreen = state.breakpoints['(max-width: 1000px) and (min-width: 768px)'] || false;
+      this.StateManager.setScreen(this.isMediumScreen);
     });
   }
 }
