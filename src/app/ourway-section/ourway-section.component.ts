@@ -12,4 +12,9 @@ import { OurwayMobileComponent } from './ourway-mobile/ourway-mobile.component';
 export class OurwaySectionComponent {
 
   @Input() isPhone!: boolean;
+  appStarted = false;
+
+  startApp(){
+    this.appStarted = true;
+  }
 }

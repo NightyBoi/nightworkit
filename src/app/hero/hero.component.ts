@@ -19,7 +19,6 @@ export class HeroComponent implements OnInit {
   constructor(private stateManager: StateManagerService){}
 
   ngOnInit(): void {
-      if(!this.isPhone){
         of(false)
         .pipe(delay(2000))
         .subscribe(
@@ -30,10 +29,6 @@ export class HeroComponent implements OnInit {
             }
           }
         )
-      }else{
-        this.stateManager.setMoon(true);
-        this.unblurMoon(true);
-      }
   }
 
   unblurMoon(moonBlurred: boolean){

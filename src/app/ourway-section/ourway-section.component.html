@@ -4,7 +4,7 @@
             <div class="col-12" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
                 <h1 style="text-align: center; color: #ececec; margin-bottom: 20px;">Take a look at our process.</h1>
                 @if (!isPhone) {
-                    <p style="text-align: center; color: #ececec;">Click the highlighted planet to embark on your journey with us. Explore each phase of our workflow as you navigate through the planets, discovering what it’s like to work with our team. Reach the moon to see where we’ll take your project — to new heights!</p>
+                    <p style="text-align: center; color: #ececec;">Launch the app and click the highlighted planet to begin your journey with us. Explore each phase of our workflow as you navigate through the planets, discovering what it's like to work with our team. Reach the moon to see where we'll take your project — to new heights!</p>
                 }
             </div>
         </div>
@@ -16,9 +16,15 @@
     }
     
 </div>
-
     @if (!isPhone) {
-        @defer () {
+
+        @if(!appStarted){
+            <div class="start-button-wrapper">
+                <div class="fadein"></div>
+                <div class="fadeout"></div>
+                <button class="controls testing" (click)="startApp()">Start The Journey</button>
+            </div>
+        }@else{
             <app-ourway></app-ourway>
-        }
+        }   
     }
