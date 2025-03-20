@@ -1,86 +1,156 @@
 <div class="container-fluid" id="contact-us">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 d-none d-lg-block" style="padding-right: 40px;">
-                <img class="contact-img" alt="The Milky Way stretches across the night sky, casting a celestial glow over the rugged mountain landscape." src="stars.webp">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 d-none d-lg-block" style="padding-right: 80px">
+        <img
+          class="contact-img"
+          alt="The Milky Way stretches across the night sky, casting a celestial glow over the rugged mountain landscape."
+          src="stars.webp"
+        />
+      </div>
+      <div class="col-lg-6 col-form">
+        <h1 style="margin-bottom: 0">Let's get started</h1>
+        <div class="separator"></div>
+        <p>
+          Contact us for a free consultation call or chat, and let's start
+          turning your vision into reality.
+        </p>
+
+        <form
+          #contactForm="ngForm"
+          (ngSubmit)="formSubmit(contactForm, $event)"
+          style="position: relative"
+        >
+          <div class="row" style="margin-bottom: 0">
+            <div class="col-md-6" style="margin-bottom: 24px">
+              <input
+                #first_name="ngModel"
+                required
+                class="form-input"
+                [class.invalid]="first_name.touched && !first_name.valid"
+                type="text"
+                name="first_name"
+                placeholder="First name"
+                [(ngModel)]="contactDetails.first_name"
+              />
+              @if (first_name.touched && !first_name.valid) {
+              <p class="invalidp">First name is required.</p>
+              }
             </div>
-            <div class="col-lg-6 col-form">
-                <h1 style="margin-bottom: 0;">Let's get started</h1>
-                <div class="separator"></div>
-                <p>Contact us for a free consultation call or chat, and let's start turning your vision into reality.</p>
-
-                <form #contactForm="ngForm" (ngSubmit)="formSubmit(contactForm, $event)" style="position: relative;">
-                    <div class="row" style="margin-bottom: 0;">
-                        <div class="col-md-6" style="margin-bottom: 24px">
-                            <input #first_name="ngModel" required class="form-input" [class.invalid]="first_name.touched && !first_name.valid" type="text" name="first_name" placeholder="First name" [(ngModel)]="contactDetails.first_name">
-                            @if (first_name.touched && !first_name.valid) {
-                                <p class="invalidp">First name is required.</p>
-                            }
-                        </div>
-                        <div class="col-md-6" style="margin-bottom: 24px">
-                            <input #last_name="ngModel" required class="form-input" type="text" name="last_name" placeholder="Last name" [(ngModel)]="contactDetails.last_name" [class.invalid]="last_name.touched && !last_name.valid">
-                            @if (last_name.touched && !last_name.valid) {
-                                <p class="invalidp">Last name is required.</p>
-                            }
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-12">
-                            <input #email="ngModel" email required class="form-input" type="email" name="email" placeholder="E-Mail" [(ngModel)]="contactDetails.email" [class.invalid]="email.touched && email.value == '' || email.touched && !email.valid && submitted">
-                            @if (email.touched && email.value == '') {
-                                <p class="invalidp">Email is required.</p>
-                            }@else if (email.touched && !email.valid && submitted){
-                                <p class="invalidp">Invalid email address.</p> 
-                            }
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <select aria-label="Project Length" #project="ngModel" required class="form-input" name="project_length" [(ngModel)]="contactDetails.projectLength" [class.invalid]="project.touched && project.invalid">
-                                <option value="">Project length</option>
-                                <option value="idk">I don't know</option>
-                                <option value="1-3">1-3 months</option>
-                                <option value="3-6">3-6 months</option>
-                                <option value="6+">6+ months</option>
-                            </select>
-                            @if (project.touched && project.invalid) {
-                                <p class="invalidp">Project length is required.</p>
-                            }
-                        </div>
-                    </div>
-
-                    <div class="row" style="margin-bottom: 8px;">
-                        <div class="col-12">
-                            <textarea #message="ngModel" maxlength="500" required rows="4" class="form-input" name="message" placeholder="Your message" [(ngModel)]="contactDetails.message" [class.invalid]="message.touched && message.invalid"></textarea>
-                            @if (message.value?.length == 500) {
-                                <p class="invalidp">Message limit reached. For detailed or extensive project plans, we recommend starting a conversation via email to collaborate effectively.</p>
-                            }
-                            @if (message.touched && message.invalid) {
-                                <p class="invalidp">Message is required.</p>
-                            }
-                        </div>
-                    </div>
-                    <p style="margin-bottom: 8px;">In a universe of endless possibilities, finding the right path can be daunting. Let us be your guiding star.</p>
-                    @if (success) {
-                        <p class="success-message">The email has been sent successfully, we'll get back to you shortly. Thank you for choosing us!</p>
-                    }
-                    @if (error) {
-                        <p class="failure-message">An error occured, please try again or contact us directly at <a class="link" href="mailto:contact@nightworkit.com">contact&#64;nightworkit.com</a>.</p>
-                    }
-                    <div class="send-button">
-                        <button type="submit" class="controls testing">Send</button>
-                        @if (validSubmit) {
-                            <div class="spinner">
-                                <img style="width: 150px;" src="spinner.svg">
-                            </div>
-                        } 
-                    </div>
-                </form>
-
+            <div class="col-md-6" style="margin-bottom: 24px">
+              <input
+                #last_name="ngModel"
+                required
+                class="form-input"
+                type="text"
+                name="last_name"
+                placeholder="Last name"
+                [(ngModel)]="contactDetails.last_name"
+                [class.invalid]="last_name.touched && !last_name.valid"
+              />
+              @if (last_name.touched && !last_name.valid) {
+              <p class="invalidp">Last name is required.</p>
+              }
             </div>
-        </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <input
+                #email="ngModel"
+                email
+                required
+                class="form-input"
+                type="email"
+                name="email"
+                placeholder="E-Mail"
+                [(ngModel)]="contactDetails.email"
+                [class.invalid]="
+                  (email.touched && email.value == '') ||
+                  (email.touched && !email.valid && submitted)
+                "
+              />
+              @if (email.touched && email.value == '') {
+              <p class="invalidp">Email is required.</p>
+              }@else if (email.touched && !email.valid && submitted){
+              <p class="invalidp">Invalid email address.</p>
+              }
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <select
+                aria-label="Project Length"
+                #project="ngModel"
+                required
+                class="form-input"
+                name="project_length"
+                [(ngModel)]="contactDetails.projectLength"
+                [class.invalid]="project.touched && project.invalid"
+              >
+                <option value="">Project length</option>
+                <option value="idk">I don't know</option>
+                <option value="1-3">1-3 months</option>
+                <option value="3-6">3-6 months</option>
+                <option value="6+">6+ months</option>
+              </select>
+              @if (project.touched && project.invalid) {
+              <p class="invalidp">Project length is required.</p>
+              }
+            </div>
+          </div>
+
+          <div class="row" style="margin-bottom: 8px">
+            <div class="col-12">
+              <textarea
+                #message="ngModel"
+                maxlength="500"
+                required
+                rows="4"
+                class="form-input"
+                name="message"
+                placeholder="Your message"
+                [(ngModel)]="contactDetails.message"
+                [class.invalid]="message.touched && message.invalid"
+              ></textarea>
+              @if (message.value?.length == 500) {
+              <p class="invalidp">
+                Message limit reached. For detailed or extensive project plans,
+                we recommend starting a conversation via email to collaborate
+                effectively.
+              </p>
+              } @if (message.touched && message.invalid) {
+              <p class="invalidp">Message is required.</p>
+              }
+            </div>
+          </div>
+          <p style="margin-bottom: 8px">
+            In a universe of endless possibilities, finding the right path can
+            be daunting. Let us be your guiding star.
+          </p>
+          @if (success) {
+          <p class="success-message">
+            The email has been sent successfully, we'll get back to you shortly.
+            Thank you for choosing us!
+          </p>
+          } @if (error) {
+          <p class="failure-message">
+            An error occured, please try again or contact us directly at
+            <a class="link" href="mailto:contact@nightworkit.com"
+              >contact&#64;nightworkit.com</a
+            >.
+          </p>
+          }
+          <div class="send-button">
+            <button type="submit" class="controls testing">Send</button>
+            @if (validSubmit) {
+            <div class="spinner">
+              <img style="width: 150px" src="spinner.svg" />
+            </div>
+            }
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
-
-

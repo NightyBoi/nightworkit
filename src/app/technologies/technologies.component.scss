@@ -1,88 +1,92 @@
 @import "../variables.scss";
 
-.tech-bg{
-    background-color: #0a0214;
-    padding-top: 100px;
-    padding-bottom: 50px;
-    margin-top: -8px;
+.tech-bg {
+  background-color: #0a0214;
+  padding-top: 100px;
+  padding-bottom: 50px;
+  margin-top: -8px;
 }
 
-.col-6{
-    display: flex;
+.col-6 {
+  display: flex;
+}
+
+.designrush {
+  max-width: 150px;
 }
 
 h1 {
-    color: #ececec;
-    text-align: center;
+  color: #ececec;
+  text-align: center;
 }
 
-.header-p{
-    color: #cccccc;
-    text-align: center;
-    margin-bottom: 0;
+.header-p {
+  color: #cccccc;
+  text-align: center;
+  margin-bottom: 0;
 }
 
-.technology{
-    min-width: 100%;
-    width: 100%;
-    background-color: #1c1c1c57;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    margin-bottom: 24px;
+.technology {
+  min-width: 100%;
+  width: 100%;
+  background-color: #1c1c1c57;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  margin-bottom: 24px;
 }
 
-.technology p{
-    margin-bottom: 0;
-    color: #bbbbbb;
-    font-size: .8rem;
-    margin-top: 8px;
-    transition: all .5s ease;
-    text-align: center;
+.technology p {
+  margin-bottom: 0;
+  color: #bbbbbb;
+  font-size: 0.8rem;
+  margin-top: 8px;
+  transition: all 0.5s ease;
+  text-align: center;
 }
 
-.logo-light{
-    max-height: 50px;
-    filter: contrast(0);
-    transition: all .5s ease;
+.logo-light {
+  max-height: 50px;
+  filter: contrast(0);
+  transition: all 0.5s ease;
 }
 
-.logo{
-    max-height: 50px;
-    filter: grayscale(1);
-    // transition: all .5s ease;
+.logo {
+  max-height: 50px;
+  filter: grayscale(1);
+  // transition: all .5s ease;
 }
 
-.technology:hover{
-    .logo{
-        filter: none;
-    }
+.technology:hover {
+  .logo {
+    filter: none;
+  }
 
-    .logo-light{
-        filter: brightness(0) saturate(100%) invert(100%) sepia(80%) saturate(0%) hue-rotate(169deg) brightness(105%) contrast(101%);
-    }
+  .logo-light {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(80%) saturate(0%)
+      hue-rotate(169deg) brightness(105%) contrast(101%);
+  }
 
-    p{
-        color: white;
-    }
+  p {
+    color: white;
+  }
 }
 
 @media only screen and (max-width: 400px) {
-    .logo{
-        max-height: 30px;
-    }
-
-    .logo-light{
-        max-height: 30px;
-    }
+  .logo {
+    max-height: 30px;
   }
 
-
-  @media only screen and (max-width: 768px) {
-    .tech-bg{
-        padding-top: 16px;
-    }
+  .logo-light {
+    max-height: 30px;
   }
+}
+
+@media only screen and (max-width: 768px) {
+  .tech-bg {
+    padding-top: 16px;
+  }
+}
