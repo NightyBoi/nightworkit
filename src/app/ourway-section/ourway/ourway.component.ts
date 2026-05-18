@@ -3,7 +3,10 @@ import * as THREE from 'three';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
-import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
+import {
+  CSS2DRenderer,
+  CSS2DObject,
+} from 'three/addons/renderers/CSS2DRenderer.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as TWEEN from '@tweenjs/tween.js';
 import { StateManagerService } from '../../state-manager.service';
@@ -13,26 +16,25 @@ import { StateManagerService } from '../../state-manager.service';
   standalone: true,
   imports: [],
   templateUrl: './ourway.component.html',
-  styleUrl: './ourway.component.scss'
+  styleUrl: './ourway.component.scss',
 })
 export class OurwayComponent implements OnInit {
-
   // Scene Setup
   @ViewChild('container', { static: true }) container!: ElementRef;
   @ViewChild('mainCanvas', { static: true }) canvas!: ElementRef;
-  @ViewChild('label', {static: true}) labelElem!: ElementRef;
-  @ViewChild('label2', {static: true}) labelElem2!: ElementRef;
-  @ViewChild('label3', {static: true}) labelElem3!: ElementRef;
-  @ViewChild('label4', {static: true}) labelElem4!: ElementRef;
-  @ViewChild('label5', {static: true}) labelElem5!: ElementRef;
-  @ViewChild('next', {static: true}) buttonNext!: ElementRef;
-  @ViewChild('prev', {static: true}) buttonPrev!: ElementRef;
-  @ViewChild('reset', {static: true}) buttonReset!: ElementRef;
+  @ViewChild('label', { static: true }) labelElem!: ElementRef;
+  @ViewChild('label2', { static: true }) labelElem2!: ElementRef;
+  @ViewChild('label3', { static: true }) labelElem3!: ElementRef;
+  @ViewChild('label4', { static: true }) labelElem4!: ElementRef;
+  @ViewChild('label5', { static: true }) labelElem5!: ElementRef;
+  @ViewChild('next', { static: true }) buttonNext!: ElementRef;
+  @ViewChild('prev', { static: true }) buttonPrev!: ElementRef;
+  @ViewChild('reset', { static: true }) buttonReset!: ElementRef;
   @ViewChild('labelContainer', { static: true }) labelContainer!: ElementRef;
 
-  @ViewChild('loadingBar', {static: true}) loadingElem!: ElementRef;
-  @ViewChild('loadingFill', {static: true}) fillElem!: ElementRef;
-  @ViewChild('loadingLabel', {static: true}) loadLabelElem!: ElementRef;
+  @ViewChild('loadingBar', { static: true }) loadingElem!: ElementRef;
+  @ViewChild('loadingFill', { static: true }) fillElem!: ElementRef;
+  @ViewChild('loadingLabel', { static: true }) loadLabelElem!: ElementRef;
 
   isMediumScreen = false;
 
@@ -40,8 +42,11 @@ export class OurwayComponent implements OnInit {
   loadScene = new THREE.Scene();
   mainScene = new THREE.Scene();
 
-  singleButtonPos = {x: -1.58, y: -4, z: 0};
-  duoButtonPos = [{x: -3.2, y: -4, z: 0}, {x: 0, y: -4, z: 0}];
+  singleButtonPos = { x: -1.58, y: -4, z: 0 };
+  duoButtonPos = [
+    { x: -3.2, y: -4, z: 0 },
+    { x: 0, y: -4, z: 0 },
+  ];
 
   cameraView = 45;
   containerWidth!: number;
@@ -50,13 +55,13 @@ export class OurwayComponent implements OnInit {
   animFix = true;
   renderer!: THREE.WebGLRenderer;
 
-  planets:any[] = [];
-  availablePlanets:any[] = [];
+  planets: any[] = [];
+  availablePlanets: any[] = [];
   unlockedPlanets = 1;
 
   tweenGroup = new TWEEN.Group();
   intersectsMoon: any[] = [];
-  ringColor = {h: 0, s: 0, l: 0};
+  ringColor = { h: 0, s: 0, l: 0 };
 
   // Nebula Loader
 
@@ -75,7 +80,7 @@ export class OurwayComponent implements OnInit {
   resetObj!: CSS2DObject;
   prevObj!: CSS2DObject;
   nextObj!: CSS2DObject;
-  
+
   labelRenderer = new CSS2DRenderer();
 
   // External model Loaders
@@ -112,29 +117,32 @@ export class OurwayComponent implements OnInit {
     radius: 40,
     size: 500,
     z: -50.5,
-    x: 50
+    x: 50,
   });
   anotherNebula = this.getNebula({
-      hue: 0.0,
-      numSprites: 10,
-      opacity: 0.005,
-      radius: 40,
-      size: 500,
-      z: -50.5,
-      x: -50
+    hue: 0.0,
+    numSprites: 10,
+    opacity: 0.005,
+    radius: 40,
+    size: 500,
+    z: -50.5,
+    x: -50,
   });
 
   // Raycasting
   raycaster = new THREE.Raycaster();
   pointer = new THREE.Vector2();
 
-  constructor(private stateManager: StateManagerService){
+  constructor(private stateManager: StateManagerService) {
     this.isMediumScreen = stateManager.getMediumScreen();
-    if(this.isMediumScreen){
+    if (this.isMediumScreen) {
       this.cameraView = 60;
 
-      this.singleButtonPos = {x: -2.1, y: -5, z: 0};
-      this.duoButtonPos = [{x: -2.1, y: -4, z: 0}, {x: -2.1, y: -5.5, z: 0}];
+      this.singleButtonPos = { x: -2.1, y: -5, z: 0 };
+      this.duoButtonPos = [
+        { x: -2.1, y: -4, z: 0 },
+        { x: -2.1, y: -5.5, z: 0 },
+      ];
     }
   }
 
@@ -175,8 +183,8 @@ export class OurwayComponent implements OnInit {
     dashSize: 1,
     gapSize: 1,
   });
-  points:THREE.Vector3[] = [];
-  
+  points: THREE.Vector3[] = [];
+
   lineGeo1!: THREE.BufferGeometry;
   line1!: THREE.Line;
   lineGeo2!: THREE.BufferGeometry;
@@ -186,20 +194,28 @@ export class OurwayComponent implements OnInit {
   lineGeo4!: THREE.BufferGeometry;
   line4!: THREE.Line;
 
-  
-
   ngOnInit(): void {
     const containerStyles = getComputedStyle(this.container.nativeElement);
-    this.containerWidth = this.container.nativeElement.clientWidth - parseFloat(containerStyles.paddingLeft) - parseFloat(containerStyles.paddingRight);
+    this.containerWidth =
+      this.container.nativeElement.clientWidth -
+      parseFloat(containerStyles.paddingLeft) -
+      parseFloat(containerStyles.paddingRight);
     window.addEventListener('resize', () => this.onResize());
-    this.aspect = this.containerWidth / 880 * 1.75;
-    this.camera = new THREE.OrthographicCamera(this.aspect * this.cameraView / -2, this.aspect * this.cameraView / 2, this.cameraView / 2, this.cameraView / -2, 0.1, 1000);
+    this.aspect = (this.containerWidth / 880) * 1.75;
+    this.camera = new THREE.OrthographicCamera(
+      (this.aspect * this.cameraView) / -2,
+      (this.aspect * this.cameraView) / 2,
+      this.cameraView / 2,
+      this.cameraView / -2,
+      0.1,
+      1000,
+    );
     this.renderScene = new RenderPass(this.scene, this.camera);
     this.bloomPass = new UnrealBloomPass(
       new THREE.Vector2(this.containerWidth, 500),
       1.6,
       0.1,
-      0.1
+      0.1,
     );
 
     this.initRenderer();
@@ -207,7 +223,7 @@ export class OurwayComponent implements OnInit {
     this.initPathing();
     this.initExternal();
     this.initPostProcessing();
-    
+
     // Nebulas
 
     this.scene.add(this.nebula);
@@ -225,7 +241,10 @@ export class OurwayComponent implements OnInit {
   }
 
   initRenderer() {
-    this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas.nativeElement, antialias: true });
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: this.canvas.nativeElement,
+      antialias: true,
+    });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     //this.renderer.setSize(window.innerWidth, 400);
     this.renderer.setSize(this.containerWidth, 500);
@@ -233,7 +252,7 @@ export class OurwayComponent implements OnInit {
     this.renderer.toneMappingExposure = 1;
   }
 
-  initGUI(){
+  initGUI() {
     this.ringMesh.position.x = -40;
     this.ringMesh.position.y = -8;
     this.ringMesh.position.z = 0;
@@ -295,16 +314,18 @@ export class OurwayComponent implements OnInit {
 
     this.labelRenderer.setSize(this.containerWidth, 500);
     this.labelRenderer.domElement.style.position = 'absolute';
-    
+
     // Position the labelRenderer to align with the canvas
     this.labelRenderer.domElement.style.top = `0px`;
     this.labelRenderer.domElement.style.left = `6px`;
 
     // Append CSS2DRenderer to the Angular container
-    this.labelContainer.nativeElement.appendChild(this.labelRenderer.domElement);
+    this.labelContainer.nativeElement.appendChild(
+      this.labelRenderer.domElement,
+    );
   }
 
-  initPathing(){
+  initPathing() {
     this.points.push(new THREE.Vector3(-40, -8, 0));
     this.points.push(new THREE.Vector3(-20, 8, 0));
 
@@ -320,14 +341,14 @@ export class OurwayComponent implements OnInit {
     this.line2.computeLineDistances();
     this.scene.add(this.line2);
 
-    this.points.shift()
+    this.points.shift();
     this.points.push(new THREE.Vector3(20, 6, 0));
     this.lineGeo3 = new THREE.BufferGeometry().setFromPoints(this.points);
     this.line3 = new THREE.Line(this.lineGeo3, this.lineMat2);
     this.line3.computeLineDistances();
     this.scene.add(this.line3);
 
-    this.points.shift()
+    this.points.shift();
     this.points.push(new THREE.Vector3(40, 0, 0));
     this.lineGeo4 = new THREE.BufferGeometry().setFromPoints(this.points);
     this.line4 = new THREE.Line(this.lineGeo4, this.lineMat2);
@@ -335,22 +356,26 @@ export class OurwayComponent implements OnInit {
     this.scene.add(this.line4);
   }
 
-  initExternal(){
+  initExternal() {
     this.manager.onStart = (url, itemsLoaded, itemsTotal) => {
       //console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
     };
-  
+
     this.manager.onLoad = () => {
       this.isLoaded = true;
       this.loadScene.remove(this.loadingObj);
-      this.availablePlanets.push(this.planets.find((element) => element.name == 'planet1'));
+      this.availablePlanets.push(
+        this.planets.find((element) => element.name == 'planet1'),
+      );
       //console.log( 'Loading complete!');
       this.mainScene = this.scene;
     };
-  
-    this.manager.onProgress = ( url, itemsLoaded, itemsTotal ) => {
-      this.fillElem.nativeElement.style.width = itemsLoaded / itemsTotal * 100 + "%";
-      this.loadLabelElem.nativeElement.innerText = "Loading... (" + itemsLoaded + " of " + itemsTotal + " objects)";
+
+    this.manager.onProgress = (url, itemsLoaded, itemsTotal) => {
+      this.fillElem.nativeElement.style.width =
+        (itemsLoaded / itemsTotal) * 100 + '%';
+      this.loadLabelElem.nativeElement.innerText =
+        'Loading... (' + itemsLoaded + ' of ' + itemsTotal + ' objects)';
       //console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
     };
 
@@ -381,49 +406,51 @@ export class OurwayComponent implements OnInit {
     });
 
     this.loader.load('assets/planet2/planet2.gltf', (gltf) => {
-        let tempObj = gltf.scene;
-        tempObj.scale.multiplyScalar(0.01);
+      let tempObj = gltf.scene;
+      tempObj.scale.multiplyScalar(0.01);
 
-        this.planet2Obj = tempObj;
-        this.planet2Obj.position.x = -20;
-        this.planet2Obj.position.y = 8;
+      this.planet2Obj = tempObj;
+      this.planet2Obj.position.x = -20;
+      this.planet2Obj.position.y = 8;
 
-        this.planet2Obj.name = 'planet2';
-        //planet2Obj.add(labelObj2);
-        this.planets.push(this.planet2Obj);
+      this.planet2Obj.name = 'planet2';
+      //planet2Obj.add(labelObj2);
+      this.planets.push(this.planet2Obj);
 
-        this.scene.add(this.planet2Obj);
+      this.scene.add(this.planet2Obj);
     });
 
     this.loader.load('assets/planet3/planet3.gltf', (gltf) => {
-        let tempObj = gltf.scene;
-        tempObj.scale.multiplyScalar(0.6);
-        tempObj.position.x = -40;
-        tempObj.position.y = -8;
+      let tempObj = gltf.scene;
+      tempObj.scale.multiplyScalar(0.6);
+      tempObj.position.x = -40;
+      tempObj.position.y = -8;
 
-        this.planet3Obj = tempObj;
-        this.planet3Obj.name = 'planet1';
-        //planet3Obj.add(labelObj);
-        this.planets.push(this.planet3Obj);
+      this.planet3Obj = tempObj;
+      this.planet3Obj.name = 'planet1';
+      //planet3Obj.add(labelObj);
+      this.planets.push(this.planet3Obj);
 
-        this.scene.add(this.planet3Obj);
+      this.scene.add(this.planet3Obj);
     });
 
     this.moonMaterial.flatShading = true;
 
     this.moon = new THREE.Mesh(
-        new THREE.SphereGeometry(2.5, 20, 10),
-        this.moonMaterial
-    )
+      new THREE.SphereGeometry(2.5, 20, 10),
+      this.moonMaterial,
+    );
     this.moon.position.x = 40;
     this.moon.name = 'moon';
     this.planets.push(this.moon);
     this.scene.add(this.moon);
 
-    Array(600).fill(undefined).forEach(() => this.addStar());
+    Array(600)
+      .fill(undefined)
+      .forEach(() => this.addStar());
   }
 
-  initPostProcessing(){
+  initPostProcessing() {
     this.composer = new EffectComposer(this.renderer);
     this.composer.setSize(this.containerWidth, 500);
     this.composer.addPass(this.renderScene);
@@ -431,7 +458,6 @@ export class OurwayComponent implements OnInit {
   }
 
   addStar() {
-
     const randSize = Math.random() * 0.25 + 0.01;
 
     const geometry = new THREE.SphereGeometry(randSize, 24, 24);
@@ -439,15 +465,17 @@ export class OurwayComponent implements OnInit {
 
     const star = new THREE.Mesh(geometry, material);
 
-    const [x, y, z] = Array(3).fill(undefined).map(() => THREE.MathUtils.randFloatSpread(200));
+    const [x, y, z] = Array(3)
+      .fill(undefined)
+      .map(() => THREE.MathUtils.randFloatSpread(200));
 
     star.position.set(x, y / 2.2, z);
-    star.name = "star";
+    star.name = 'star';
 
     this.scene.add(star);
   }
 
-  animate(){
+  animate() {
     requestAnimationFrame(() => this.animate());
 
     this.tweenGroup.update();
@@ -456,7 +484,6 @@ export class OurwayComponent implements OnInit {
       this.earthObj.rotation.x -= 0.002;
       this.earthObj.rotation.y -= 0.004;
       this.earthObj.rotation.z += 0.002;
-
     }
     if (this.planet1Obj) {
       this.planet1Obj.rotation.x -= 0.002;
@@ -474,106 +501,126 @@ export class OurwayComponent implements OnInit {
       this.planet3Obj.rotation.z -= 0.002;
     }
 
-    if(this.finalAnimation && this.hoveredFirstPlanet){
-        
+    if (this.finalAnimation && this.hoveredFirstPlanet) {
+      this.ringMesh.material = this.ringMat;
+      this.ringMesh.material.color.getHSL(this.ringColor);
+
+      let minimum = 6.28;
+      let closestPoint = 0;
+      this.ringPoints.forEach((element) => {
+        if (Math.abs(element - this.ringMesh.rotation.z) < minimum) {
+          minimum = Math.abs(element - this.ringMesh.rotation.z);
+          closestPoint = element;
+        }
+      });
+
+      if (closestPoint && closestPoint - this.ringMesh.rotation.z > 0) {
+        this.ringMesh.rotation.z += 0.1;
+      } else {
+        this.ringMesh.rotation.z -= 0.1;
+      }
+
+      if (this.ringMesh.scale.y > 1.05) {
+        this.ringMesh.scale.multiplyScalar(0.997);
+      }
+      if (this.ringColor.l > 0.3) {
+        this.ringMesh.material.color.setHSL(
+          this.ringColor.h,
+          this.ringColor.s,
+          this.ringColor.l - 0.006,
+        );
+      }
+
+      if (Math.abs(closestPoint - this.ringMesh.rotation.z) < 0.1) {
+        this.finalAnimation = false;
+        this.ringMesh.rotation.z = 0;
+        this.ringMesh.scale.y = 1;
+        this.ringMesh.scale.x = 1;
+
+        this.ringMesh.material.color.setHSL(
+          this.ringColor.h,
+          this.ringColor.s,
+          0.29,
+        );
+      }
+    }
+
+    if (!this.hoveredFirstPlanet && this.ringMesh) {
+      //4 rotation checkpoints: 0 (6.28), 1.57, 3.14, 4.71
+      if (this.ringMesh.rotation.z < 6.28) {
+        this.ringMesh.rotation.z += 0.004;
+      } else {
+        this.ringMesh.rotation.z = 0;
+      }
+      this.ringMesh.material.color.getHSL(this.ringColor);
+
+      if (this.expand) {
+        this.ringMesh.scale.multiplyScalar(1.003);
+        this.ringMesh.material.color.setHSL(
+          this.ringColor.h,
+          this.ringColor.s,
+          this.ringColor.l + 0.003,
+        );
+      } else {
+        this.ringMesh.scale.multiplyScalar(0.997);
+        this.ringMesh.material.color.setHSL(
+          this.ringColor.h,
+          this.ringColor.s,
+          this.ringColor.l - 0.003,
+        );
+      }
+
+      if (this.ringMesh.scale.y >= 1.2) {
+        this.expand = false;
+      } else if (this.ringMesh.scale.y <= 0.99) {
+        this.expand = true;
+      }
+    }
+
+    if (this.intersectsMoon.length > 0 && !this.hoveredFirstPlanet) {
+      let tempObj = this.intersectsMoon[0].object;
+      while (tempObj.parent != this.scene) {
+        if (tempObj.parent) {
+          tempObj = tempObj.parent;
+        }
+      }
+
+      if (tempObj.name == 'planet1') {
+        this.hoveredFirstPlanet = true;
+        this.finalAnimation = true;
+      }
+    } else if (
+      this.intersectsMoon.length > 0 &&
+      this.offset &&
+      this.intersectsMoon[0].object.name != 'star' &&
+      this.hoveredFirstPlanet
+    ) {
+      let tempObj = this.intersectsMoon[0].object;
+      let tempPos = tempObj.position;
+      while (tempObj.parent != this.scene) {
+        if (tempObj.parent) {
+          tempObj = tempObj.parent;
+        }
+        tempPos = tempObj.position;
+      }
+
+      if (this.availablePlanets.includes(tempObj)) {
         this.ringMesh.material = this.ringMat;
-        this.ringMesh.material.color.getHSL(this.ringColor);
-        
-        let minimum = 6.28;
-        let closestPoint = 0;
-        this.ringPoints.forEach((element) => {
-            if(Math.abs(element - this.ringMesh.rotation.z) < minimum){
-                minimum = Math.abs(element - this.ringMesh.rotation.z);
-                closestPoint = element;
-            }
-        })
+      } else {
+        this.ringMesh.material = this.ringMat2;
+      }
 
-        if(closestPoint && (closestPoint - this.ringMesh.rotation.z > 0)){
-          this.ringMesh.rotation.z += 0.1;
-        }else{
-          this.ringMesh.rotation.z -= 0.1;
-        }
+      this.ringMesh.position.x = tempPos.x;
+      this.ringMesh.position.y = tempPos.y;
+      this.ringMesh.position.z = tempPos.z;
 
-        if(this.ringMesh.scale.y > 1.05){
-          this.ringMesh.scale.multiplyScalar(0.997);
-        }
-        if(this.ringColor.l > 0.3){
-          this.ringMesh.material.color.setHSL(this.ringColor.h, this.ringColor.s, this.ringColor.l - 0.006);
-        }
-
-        if(Math.abs(closestPoint - this.ringMesh.rotation.z) < 0.1){
-          this.finalAnimation = false;
-          this.ringMesh.rotation.z = 0;
-          this.ringMesh.scale.y = 1;
-          this.ringMesh.scale.x = 1;
-          
-          this.ringMesh.material.color.setHSL(this.ringColor.h, this.ringColor.s, 0.29);
-        }
-    }
-
-    if(!this.hoveredFirstPlanet && this.ringMesh){
-        
-        //4 rotation checkpoints: 0 (6.28), 1.57, 3.14, 4.71 
-        if(this.ringMesh.rotation.z < 6.28){
-          this.ringMesh.rotation.z += 0.004;
-        }else{
-          this.ringMesh.rotation.z = 0;
-        }
-        this.ringMesh.material.color.getHSL(this.ringColor);
-
-        if(this.expand){
-          this.ringMesh.scale.multiplyScalar(1.003);
-          this.ringMesh.material.color.setHSL(this.ringColor.h, this.ringColor.s, this.ringColor.l + 0.003);
-        }else{
-          this.ringMesh.scale.multiplyScalar(0.997);
-          this.ringMesh.material.color.setHSL(this.ringColor.h, this.ringColor.s, this.ringColor.l - 0.003);
-        }
-
-        if(this.ringMesh.scale.y >= 1.2){
-          this.expand = false;
-        }else if(this.ringMesh.scale.y <= 0.99){
-          this.expand = true;
-        }
-    }
-
-    if(this.intersectsMoon.length > 0 && !this.hoveredFirstPlanet){
-        let tempObj = this.intersectsMoon[0].object;
-        while (tempObj.parent != this.scene) {
-          if(tempObj.parent){
-            tempObj = tempObj.parent;
-          }
-            
-        }
-
-        if(tempObj.name == "planet1"){
-          this.hoveredFirstPlanet = true;
-          this.finalAnimation = true;
-        }
-        
-    }else if (this.intersectsMoon.length > 0 && this.offset && this.intersectsMoon[0].object.name != "star" && this.hoveredFirstPlanet) {
-        let tempObj = this.intersectsMoon[0].object;
-        let tempPos = tempObj.position;
-        while (tempObj.parent != this.scene) {
-          if(tempObj.parent){
-            tempObj = tempObj.parent;
-          }
-            tempPos = tempObj.position;
-        }
-
-        if(this.availablePlanets.includes(tempObj)){
-          this.ringMesh.material = this.ringMat;
-        }else{
-          this.ringMesh.material = this.ringMat2;
-        }
-
-        this.ringMesh.position.x = tempPos.x;
-        this.ringMesh.position.y = tempPos.y;
-        this.ringMesh.position.z = tempPos.z;
-
-        this.offset = false;
-        this.scene.add(this.ringMesh);
-    } else if (this.intersectsMoon.length == 0 && !this.offset && this.hoveredFirstPlanet) {
-
+      this.offset = false;
+      this.scene.add(this.ringMesh);
+    } else if (
+      this.intersectsMoon.length == 0 &&
+      !this.offset &&
+      this.hoveredFirstPlanet
+    ) {
       this.offset = true;
       this.scene.remove(this.ringMesh);
     }
@@ -586,113 +633,131 @@ export class OurwayComponent implements OnInit {
     this.renderer.render(this.mainScene, this.camera);
     this.labelRenderer.render(this.mainScene, this.camera);
 
-    if(this.isLoaded){
+    if (this.isLoaded) {
       this.composer.render();
     }
-    
   }
 
   nextPlanet() {
-      let nextObj:THREE.Object3D | undefined = new THREE.Object3D();
-      switch (this.selectedPlanet.name) {
-          case 'planet1':
-              nextObj = this.scene.getObjectByName('planet2');
-              break;
-          case 'planet2':
-              nextObj = this.scene.getObjectByName('planet3');
-              break;
-          case 'planet3':
-              nextObj = this.scene.getObjectByName('earth');
-              break;
-          case 'earth':
-              nextObj = this.scene.getObjectByName('moon');
-              break;
-          default:
-              break;
-      }
+    let nextObj: THREE.Object3D | undefined = new THREE.Object3D();
+    switch (this.selectedPlanet.name) {
+      case 'planet1':
+        nextObj = this.scene.getObjectByName('planet2');
+        break;
+      case 'planet2':
+        nextObj = this.scene.getObjectByName('planet3');
+        break;
+      case 'planet3':
+        nextObj = this.scene.getObjectByName('earth');
+        break;
+      case 'earth':
+        nextObj = this.scene.getObjectByName('moon');
+        break;
+      default:
+        break;
+    }
 
-      if(nextObj){
-        this.goToPlanet(nextObj, 500);
-      }
+    if (nextObj) {
+      this.goToPlanet(nextObj, 500);
+    }
   }
 
   previousPlanet() {
-      let prevObj:THREE.Object3D | undefined = new THREE.Object3D();
-      switch (this.selectedPlanet.name) {
-          case 'planet2':
-              prevObj = this.scene.getObjectByName('planet1');
-              break;
-          case 'planet3':
-              prevObj = this.scene.getObjectByName('planet2');
-              break;
-          case 'earth':
-              prevObj = this.scene.getObjectByName('planet3');
-              break;
-          case 'moon':
-              prevObj = this.scene.getObjectByName('earth');
-              break;
-          default:
-              break;
-      }
+    let prevObj: THREE.Object3D | undefined = new THREE.Object3D();
+    switch (this.selectedPlanet.name) {
+      case 'planet2':
+        prevObj = this.scene.getObjectByName('planet1');
+        break;
+      case 'planet3':
+        prevObj = this.scene.getObjectByName('planet2');
+        break;
+      case 'earth':
+        prevObj = this.scene.getObjectByName('planet3');
+        break;
+      case 'moon':
+        prevObj = this.scene.getObjectByName('earth');
+        break;
+      default:
+        break;
+    }
 
-      this.buttonPrev.nativeElement.style.opacity = 0;
-      this.buttonNext.nativeElement.style.opacity = 0;
-      this.buttonReset.nativeElement.style.opacity = 0;
+    this.buttonPrev.nativeElement.style.opacity = 0;
+    this.buttonNext.nativeElement.style.opacity = 0;
+    this.buttonReset.nativeElement.style.opacity = 0;
 
-      if(prevObj){
-        this.goToPlanet(prevObj, 500);
-      }
+    if (prevObj) {
+      this.goToPlanet(prevObj, 500);
+    }
   }
 
   goToPlanet(planetObj: THREE.Object3D, animDuration: number) {
     let tempObj = planetObj;
     let tempPos = tempObj.position;
     while (tempObj.parent && tempObj.parent != this.scene) {
-        tempObj = tempObj.parent;
-        tempPos = tempObj.position;
+      tempObj = tempObj.parent;
+      tempPos = tempObj.position;
     }
 
     this.selectedPlanet = tempObj;
 
-    if(this.selectedPlanet.name == 'planet1' && this.unlockedPlanets == 1){
+    if (this.selectedPlanet.name == 'planet1' && this.unlockedPlanets == 1) {
       this.unlockedPlanets = 2;
       this.line1.material = this.lineMat;
-    }else if(this.selectedPlanet.name == 'planet2' && this.unlockedPlanets == 2){
+    } else if (
+      this.selectedPlanet.name == 'planet2' &&
+      this.unlockedPlanets == 2
+    ) {
       this.unlockedPlanets = 3;
       this.line2.material = this.lineMat;
-    }else if(this.selectedPlanet.name == 'planet3' && this.unlockedPlanets == 3){
+    } else if (
+      this.selectedPlanet.name == 'planet3' &&
+      this.unlockedPlanets == 3
+    ) {
       this.unlockedPlanets = 4;
       this.line3.material = this.lineMat;
-    }else if(this.selectedPlanet.name == 'earth' && this.unlockedPlanets == 4){
+    } else if (
+      this.selectedPlanet.name == 'earth' &&
+      this.unlockedPlanets == 4
+    ) {
       this.unlockedPlanets = 5;
       this.line4.material = this.lineMat;
     }
 
-    if(this.unlockedPlanets == 2 && this.availablePlanets.length == 1){
-      this.availablePlanets.push(this.planets.find((element) => element.name == 'planet2'));
-    }else if(this.unlockedPlanets == 3 && this.availablePlanets.length == 2){
-      this.availablePlanets.push(this.planets.find((element) => element.name == 'planet3'));
-    }else if(this.unlockedPlanets == 4 && this.availablePlanets.length == 3){
-      this.availablePlanets.push(this.planets.find((element) => element.name == 'earth'));
-    }else if(this.unlockedPlanets == 5 && this.availablePlanets.length == 4){
-      this.availablePlanets.push(this.planets.find((element) => element.name == 'moon'));
+    if (this.unlockedPlanets == 2 && this.availablePlanets.length == 1) {
+      this.availablePlanets.push(
+        this.planets.find((element) => element.name == 'planet2'),
+      );
+    } else if (this.unlockedPlanets == 3 && this.availablePlanets.length == 2) {
+      this.availablePlanets.push(
+        this.planets.find((element) => element.name == 'planet3'),
+      );
+    } else if (this.unlockedPlanets == 4 && this.availablePlanets.length == 3) {
+      this.availablePlanets.push(
+        this.planets.find((element) => element.name == 'earth'),
+      );
+    } else if (this.unlockedPlanets == 5 && this.availablePlanets.length == 4) {
+      this.availablePlanets.push(
+        this.planets.find((element) => element.name == 'moon'),
+      );
     }
 
     let zoom = {
-        value: this.camera.zoom,
-        left: this.camera.left,
-        right: this.camera.right,
-        top: this.camera.top,
-        bottom: this.camera.bottom
+      value: this.camera.zoom,
+      left: this.camera.left,
+      right: this.camera.right,
+      top: this.camera.top,
+      bottom: this.camera.bottom,
     };
     let zoomEnd = {
-        value: 3.5,
-        left: (this.aspect * this.cameraView / -2) + tempPos.x + 10,
-        right: (this.aspect * this.cameraView / 2) + tempPos.x + 10,
-        top: (this.cameraView / 2) + tempPos.y,
-        bottom: (this.cameraView / -2) + tempPos.y
+      value: 3.5,
+      left: (this.aspect * this.cameraView) / -2 + tempPos.x + 10,
+      right: (this.aspect * this.cameraView) / 2 + tempPos.x + 10,
+      top: this.cameraView / 2 + tempPos.y,
+      bottom: this.cameraView / -2 + tempPos.y,
     };
-    let tween = new TWEEN.Tween(zoom, this.tweenGroup).to(zoomEnd, animDuration).easing(TWEEN.Easing.Cubic.Out);
+    let tween = new TWEEN.Tween(zoom, this.tweenGroup)
+      .to(zoomEnd, animDuration)
+      .easing(TWEEN.Easing.Cubic.Out);
     tween.onUpdate(() => {
       this.camera.zoom = zoom.value;
       this.camera.left = zoom.left;
@@ -703,166 +768,203 @@ export class OurwayComponent implements OnInit {
 
     tween.start();
 
-      this.labelElem.nativeElement.classList.remove('disabled');
-      this.labelElem2.nativeElement.classList.remove('disabled');
-      this.labelElem3.nativeElement.classList.remove('disabled');
-      this.labelElem4.nativeElement.classList.remove('disabled');
-      this.labelElem5.nativeElement.classList.remove('disabled');
-      this.buttonReset.nativeElement.classList.remove('disabled');
-      this.buttonPrev.nativeElement.classList.remove('disabled');
-      this.buttonNext.nativeElement.classList.remove('disabled');
+    this.labelElem.nativeElement.classList.remove('disabled');
+    this.labelElem2.nativeElement.classList.remove('disabled');
+    this.labelElem3.nativeElement.classList.remove('disabled');
+    this.labelElem4.nativeElement.classList.remove('disabled');
+    this.labelElem5.nativeElement.classList.remove('disabled');
+    this.buttonReset.nativeElement.classList.remove('disabled');
+    this.buttonPrev.nativeElement.classList.remove('disabled');
+    this.buttonNext.nativeElement.classList.remove('disabled');
 
     if (tempObj.name == 'planet1') {
-        setTimeout(() => {
-          this.labelElem.nativeElement.style.opacity = 1;
-        }, 500)
+      setTimeout(() => {
+        this.labelElem.nativeElement.style.opacity = 1;
+      }, 500);
     } else if (tempObj.name == 'planet2') {
-        setTimeout(() => {
-          this.labelElem2.nativeElement.style.opacity = 1;
-        }, 500)
+      setTimeout(() => {
+        this.labelElem2.nativeElement.style.opacity = 1;
+      }, 500);
     } else if (tempObj.name == 'planet3') {
-        setTimeout(() => {
-          this.labelElem3.nativeElement.style.opacity = 1;
-        }, 500)
+      setTimeout(() => {
+        this.labelElem3.nativeElement.style.opacity = 1;
+      }, 500);
     } else if (tempObj.name == 'earth') {
-        setTimeout(() => {
-          this.labelElem4.nativeElement.style.opacity = 1;
-        }, 500)
+      setTimeout(() => {
+        this.labelElem4.nativeElement.style.opacity = 1;
+      }, 500);
     } else if (tempObj.name == 'moon') {
-        setTimeout(() => {
-          this.labelElem5.nativeElement.style.opacity = 1;
-        }, 500)
+      setTimeout(() => {
+        this.labelElem5.nativeElement.style.opacity = 1;
+      }, 500);
     }
-
 
     this.resetObj.position.set(tempPos.x + 18, tempPos.y + 4, tempPos.z);
     this.buttonReset.nativeElement.style.opacity = 1;
 
     if (tempObj.name != 'planet1' && tempObj.name != 'moon') {
-        this.prevObj.position.set(tempPos.x + this.duoButtonPos[0].x, tempPos.y + this.duoButtonPos[0].y, tempPos.z);
-        this.buttonPrev.nativeElement.style.opacity = 1;
+      this.prevObj.position.set(
+        tempPos.x + this.duoButtonPos[0].x,
+        tempPos.y + this.duoButtonPos[0].y,
+        tempPos.z,
+      );
+      this.buttonPrev.nativeElement.style.opacity = 1;
 
-        this.nextObj.position.set(tempPos.x + this.duoButtonPos[1].x , tempPos.y + this.duoButtonPos[1].y, tempPos.z);
-        this.buttonNext.nativeElement.style.opacity = 1;
+      this.nextObj.position.set(
+        tempPos.x + this.duoButtonPos[1].x,
+        tempPos.y + this.duoButtonPos[1].y,
+        tempPos.z,
+      );
+      this.buttonNext.nativeElement.style.opacity = 1;
 
-        if (tempObj.name == 'planet2') {
-            this.labelObj2.position.set(tempPos.x + 5, tempPos.y + 2.65, tempPos.z);
-        } else if (tempObj.name == 'planet3') {
-            this.labelObj3.position.set(tempPos.x + 5, tempPos.y + 2.65, tempPos.z);
-        } else if (tempObj.name == 'earth') {
-            this.labelObj4.position.set(tempPos.x + 5, tempPos.y + 2.65, tempPos.z);
-        }
-
+      if (tempObj.name == 'planet2') {
+        this.labelObj2.position.set(tempPos.x + 5, tempPos.y + 2.65, tempPos.z);
+      } else if (tempObj.name == 'planet3') {
+        this.labelObj3.position.set(tempPos.x + 5, tempPos.y + 2.65, tempPos.z);
+      } else if (tempObj.name == 'earth') {
+        this.labelObj4.position.set(tempPos.x + 5, tempPos.y + 2.65, tempPos.z);
+      }
     } else if (tempObj.name == 'planet1') {
-        this.labelObj.position.set(tempPos.x + 5, tempPos.y + 2.65, tempPos.z);
+      this.labelObj.position.set(tempPos.x + 5, tempPos.y + 2.65, tempPos.z);
 
-        this.nextObj.position.set(tempPos.x + this.singleButtonPos.x, tempPos.y + this.singleButtonPos.y, tempPos.z + this.singleButtonPos.z);
-        this.buttonNext.nativeElement.style.opacity = 1;
+      this.nextObj.position.set(
+        tempPos.x + this.singleButtonPos.x,
+        tempPos.y + this.singleButtonPos.y,
+        tempPos.z + this.singleButtonPos.z,
+      );
+      this.buttonNext.nativeElement.style.opacity = 1;
     } else if (tempObj.name == 'moon') {
-        this.labelObj5.position.set(tempPos.x + 5, tempPos.y + 1.7, tempPos.z);
+      this.labelObj5.position.set(tempPos.x + 5, tempPos.y + 1.7, tempPos.z);
 
-        this.prevObj.position.set(tempPos.x + this.singleButtonPos.x, tempPos.y + this.singleButtonPos.y, tempPos.z + this.singleButtonPos.z);
-        this.buttonPrev.nativeElement.style.opacity = 1;
+      this.prevObj.position.set(
+        tempPos.x + this.singleButtonPos.x,
+        tempPos.y + this.singleButtonPos.y,
+        tempPos.z + this.singleButtonPos.z,
+      );
+      this.buttonPrev.nativeElement.style.opacity = 1;
     }
   }
 
   resetCamera() {
-      if (this.animFix) {
-        this.animFix = false;
-        this.labelElem.nativeElement.style.opacity = 0;
-        this.labelElem.nativeElement.classList.add('disabled');
-        this.labelElem2.nativeElement.style.opacity = 0;
-        this.labelElem2.nativeElement.classList.add('disabled');
-        this.labelElem3.nativeElement.style.opacity = 0;
-        this.labelElem3.nativeElement.classList.add('disabled');
-        this.labelElem4.nativeElement.style.opacity = 0;
-        this.labelElem4.nativeElement.classList.add('disabled');
-        this.labelElem5.nativeElement.style.opacity = 0;
-        this.labelElem5.nativeElement.classList.add('disabled');
-        this.buttonReset.nativeElement.style.opacity = 0;
-        this.buttonReset.nativeElement.classList.add('disabled');
-        this.buttonPrev.nativeElement.style.opacity = 0;
-        this.buttonPrev.nativeElement.classList.add('disabled');
-        this.buttonNext.nativeElement.style.opacity = 0;
-        this.buttonNext.nativeElement.classList.add('disabled');
+    if (this.animFix) {
+      this.animFix = false;
+      this.labelElem.nativeElement.style.opacity = 0;
+      this.labelElem.nativeElement.classList.add('disabled');
+      this.labelElem2.nativeElement.style.opacity = 0;
+      this.labelElem2.nativeElement.classList.add('disabled');
+      this.labelElem3.nativeElement.style.opacity = 0;
+      this.labelElem3.nativeElement.classList.add('disabled');
+      this.labelElem4.nativeElement.style.opacity = 0;
+      this.labelElem4.nativeElement.classList.add('disabled');
+      this.labelElem5.nativeElement.style.opacity = 0;
+      this.labelElem5.nativeElement.classList.add('disabled');
+      this.buttonReset.nativeElement.style.opacity = 0;
+      this.buttonReset.nativeElement.classList.add('disabled');
+      this.buttonPrev.nativeElement.style.opacity = 0;
+      this.buttonPrev.nativeElement.classList.add('disabled');
+      this.buttonNext.nativeElement.style.opacity = 0;
+      this.buttonNext.nativeElement.classList.add('disabled');
 
-          let zoom = {
-              value: this.camera.zoom,
-              left: this.camera.left,
-              right: this.camera.right,
-              top: this.camera.top,
-              bottom: this.camera.bottom
-          };
-          let zoomEnd = {
-              value: 1,
-              left: this.aspect * this.cameraView / -2,
-              right: this.aspect * this.cameraView / 2,
-              top: this.cameraView / 2,
-              bottom: this.cameraView / -2
-          };
-          let tween = new TWEEN.Tween(zoom, this.tweenGroup).to(zoomEnd, 750);
-          tween.onUpdate(() => {
-            this.camera.zoom = zoom.value;
-            this.camera.left = zoom.left;
-            this.camera.right = zoom.right;
-            this.camera.top = zoom.top;
-            this.camera.bottom = zoom.bottom;
-          }).onComplete(() => {
-            this.animFix = true;
-          });
+      let zoom = {
+        value: this.camera.zoom,
+        left: this.camera.left,
+        right: this.camera.right,
+        top: this.camera.top,
+        bottom: this.camera.bottom,
+      };
+      let zoomEnd = {
+        value: 1,
+        left: (this.aspect * this.cameraView) / -2,
+        right: (this.aspect * this.cameraView) / 2,
+        top: this.cameraView / 2,
+        bottom: this.cameraView / -2,
+      };
+      let tween = new TWEEN.Tween(zoom, this.tweenGroup).to(zoomEnd, 750);
+      tween
+        .onUpdate(() => {
+          this.camera.zoom = zoom.value;
+          this.camera.left = zoom.left;
+          this.camera.right = zoom.right;
+          this.camera.top = zoom.top;
+          this.camera.bottom = zoom.bottom;
+        })
+        .onComplete(() => {
+          this.animFix = true;
+        });
 
-          setTimeout(() => {
-              tween.start();
-          }, 750);
-      }
+      setTimeout(() => {
+        tween.start();
+      }, 750);
+    }
   }
 
   onPointerClick() {
-    
-      if(this.unlockedPlanets == 2 && this.availablePlanets.length == 1){
-        this.availablePlanets.push(this.planets.find((element) => element.name == 'planet2'));
-      }else if(this.unlockedPlanets == 3 && this.availablePlanets.length == 2){
-        this.availablePlanets.push(this.planets.find((element) => element.name == 'planet3'));
-      }else if(this.unlockedPlanets == 4 && this.availablePlanets.length == 3){
-        this.availablePlanets.push(this.planets.find((element) => element.name == 'earth'));
-      }else if(this.unlockedPlanets == 5 && this.availablePlanets.length == 4){
-        this.availablePlanets.push(this.planets.find((element) => element.name == 'moon'));
-      }
+    if (this.unlockedPlanets == 2 && this.availablePlanets.length == 1) {
+      this.availablePlanets.push(
+        this.planets.find((element) => element.name == 'planet2'),
+      );
+    } else if (this.unlockedPlanets == 3 && this.availablePlanets.length == 2) {
+      this.availablePlanets.push(
+        this.planets.find((element) => element.name == 'planet3'),
+      );
+    } else if (this.unlockedPlanets == 4 && this.availablePlanets.length == 3) {
+      this.availablePlanets.push(
+        this.planets.find((element) => element.name == 'earth'),
+      );
+    } else if (this.unlockedPlanets == 5 && this.availablePlanets.length == 4) {
+      this.availablePlanets.push(
+        this.planets.find((element) => element.name == 'moon'),
+      );
+    }
 
-      const intersectClick = this.raycaster.intersectObjects(this.availablePlanets);
-      if (intersectClick.length > 0) {
-        this.goToPlanet(intersectClick[0].object, 800);
-      }
+    const intersectClick = this.raycaster.intersectObjects(
+      this.availablePlanets,
+    );
+    if (intersectClick.length > 0) {
+      this.goToPlanet(intersectClick[0].object, 800);
+    }
   }
 
-
-onResize() {
+  onResize() {
     const containerStyles = getComputedStyle(this.container.nativeElement);
-    this.containerWidth = this.container.nativeElement.clientWidth - parseFloat(containerStyles.paddingLeft) - parseFloat(containerStyles.paddingRight);
+    this.containerWidth =
+      this.container.nativeElement.clientWidth -
+      parseFloat(containerStyles.paddingLeft) -
+      parseFloat(containerStyles.paddingRight);
     // Update renderer size
     this.renderer.setSize(this.containerWidth, 500);
     this.labelRenderer.setSize(this.containerWidth, 500);
 
-    this.aspect = this.containerWidth / 880 * 1.75;
+    this.aspect = (this.containerWidth / 880) * 1.75;
 
     // Update camera properties
 
-    this.camera.left = this.aspect * this.cameraView / -2;
-    this.camera.right = this.aspect * this.cameraView / 2;
+    this.camera.left = (this.aspect * this.cameraView) / -2;
+    this.camera.right = (this.aspect * this.cameraView) / 2;
     this.camera.top = this.cameraView / 2;
     this.camera.bottom = this.cameraView / -2;
-     this.camera.updateProjectionMatrix();
+    this.camera.updateProjectionMatrix();
 
     // Update composer size if using post-processing
     this.composer.setSize(this.containerWidth, 500);
   }
 
-  getSprite({ color, opacity, pos, size }:{color: THREE.Color, opacity: number, pos: THREE.Vector3, size: number}) {
+  getSprite({
+    color,
+    opacity,
+    pos,
+    size,
+  }: {
+    color: THREE.Color;
+    opacity: number;
+    pos: THREE.Vector3;
+    size: number;
+  }) {
     const spriteMat = new THREE.SpriteMaterial({
-        color,
-        map: this.nebulaLoader.load("rad-grad.png"),
-        transparent: true,
-        opacity,
+      color,
+      map: this.nebulaLoader.load('rad-grad.png'),
+      transparent: true,
+      opacity,
     });
     spriteMat.color.offsetHSL(0, 0, Math.random() * 0.2 - 0.1);
     const sprite = new THREE.Sprite(spriteMat);
@@ -881,24 +983,23 @@ onResize() {
     sat = 0.5,
     size = 1,
     z = 0,
-    x = 0
+    x = 0,
   }) {
-      const layerGroup = new THREE.Group();
-      for (let i = 0; i < numSprites; i += 1) {
-          let angle = (i / numSprites) * Math.PI * 2;
-          const pos = new THREE.Vector3(
-              x + Math.cos(angle) * Math.random() * radius,
-              Math.sin(angle) * Math.random() * radius,
-              z + Math.random()
-          );
-          const length = new THREE.Vector3(pos.x, pos.y, 0).length();
-          //const hue = 0.0; // (0.9 - (radius - length) / radius) * 1;
+    const layerGroup = new THREE.Group();
+    for (let i = 0; i < numSprites; i += 1) {
+      let angle = (i / numSprites) * Math.PI * 2;
+      const pos = new THREE.Vector3(
+        x + Math.cos(angle) * Math.random() * radius,
+        Math.sin(angle) * Math.random() * radius,
+        z + Math.random(),
+      );
+      const length = new THREE.Vector3(pos.x, pos.y, 0).length();
+      //const hue = 0.0; // (0.9 - (radius - length) / radius) * 1;
 
-          let color = new THREE.Color().setHSL(hue, 1, sat);
-          const sprite = this.getSprite({ color, opacity, pos, size });
-          layerGroup.add(sprite);
-      }
-      return layerGroup;
+      let color = new THREE.Color().setHSL(hue, 1, sat);
+      const sprite = this.getSprite({ color, opacity, pos, size });
+      layerGroup.add(sprite);
+    }
+    return layerGroup;
   }
-
 }
