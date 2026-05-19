@@ -1,26 +1,15 @@
-<div class="container-fluid">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3 col-sm-6 col-12 info">
-                <h1 class="title">{{diffInDays}}</h1>
-                <p style="margin-bottom: 0;">Days Strong</p>
-                <!-- <p class="comment">(Founded 2022)</p> -->
-            </div>
-            <div class="col-md-3 col-sm-6 col-12 info">
-                <h1 class="title">0</h1>
-                <p style="margin-bottom: 0;">Clients Annoyed</p>
-                <!-- <p class="comment">(So far)</p> -->
-            </div>
-            <div class="col-md-3 col-sm-6 col-12 info">
-                <h1 class="title">242+</h1>
-                <p style="margin-bottom: 0;">Midnight Ideas</p>
-                <!-- <p class="comment">(So peaceful)</p> -->
-            </div>
-            <div class="col-md-3 col-sm-6 col-12 info">
-                <h1 class="title">1.000.000+</h1>
-                <p style="margin-bottom: 0;">Keystrokes Typed</p>
-                <!-- <p class="comment">(It's a journey fueled by caffeine)</p> -->
-            </div>
+<section class="stats">
+  <div class="stats-container">
+    <div class="stat-row">
+      @for (stat of stats; track stat.label; let i = $index) {
+        <div class="stat-cell">
+          <div class="stat-num" #statNum [attr.data-idx]="i">
+            {{ stat.format(stat.current) }}<span class="unit">{{ stat.suffix }}</span>
+          </div>
+          <div class="stat-label">{{ stat.label }}</div>
+          <div class="stat-meta">{{ stat.meta }}</div>
         </div>
+      }
     </div>
-</div>
+  </div>
+</section>

@@ -1,138 +1,29 @@
-<div class="container-fluid tech-bg">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <h1>Technologies we use</h1>
-        <p class="header-p">
-          From development to deployment, these tools help us craft smarter
-          solutions for your business.
-        </p>
-      </div>
-    </div>
+<section class="section-pad" id="stack">
+  <div class="tech-container">
+    <div class="section-eyebrow"><span class="bar"></span> Our stack</div>
+    <h2 class="section-h">Tools we reach for, grouped by what they do for you.</h2>
+    <p class="section-lede">
+      We don't chase trends. These are the technologies we've shipped to production for paying clients in the last 24 months.
+    </p>
 
-    <div class="row" style="margin-top: 32px">
-      <div class="col-lg-1 d-lg-block d-none"></div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img class="logo" alt="Angular logo" src="logos/angular.svg" />
-          <p>Angular</p>
+    <div class="tech-grid">
+      @for (cluster of clusters; track cluster.tag) {
+        <div class="cluster">
+          <div class="cluster-head">
+            <span class="cluster-tag">{{ cluster.tag }}</span>
+          </div>
+          <h3>{{ cluster.title }}</h3>
+          <p>{{ cluster.caption }}</p>
+          <div class="cluster-logos">
+            @for (logo of cluster.logos; track logo.label) {
+              <span class="logo-chip" [class.light]="logo.light">
+                <img [src]="logo.src" [alt]="logo.label + ' logo'" height="18" />
+                {{ logo.label }}
+              </span>
+            }
+          </div>
         </div>
-      </div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img class="logo" alt="React logo" src="logos/react.svg" />
-          <p>React</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img class="logo" alt="NodeJS Logo" src="logos/nodejs.svg" />
-          <p>NodeJS</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img class="logo" alt="HTML5 Logo" src="logos/html.svg" />
-          <p>HTML 5</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img class="logo" alt="CSS3 Logo" src="logos/css.svg" />
-          <p>CSS 3</p>
-        </div>
-      </div>
-      <div class="col-lg-1 d-lg-block d-none"></div>
-
-      <div class="col-lg-1 d-lg-block d-none"></div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img class="logo" alt="Python Logo" src="logos/python.svg" />
-          <p>Python</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img class="logo-light" alt="ThreeJS Logo" src="logos/threejs.svg" />
-          <p>ThreeJS</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img class="logo" alt="VueJS Logo" src="logos/vuejs.svg" />
-          <p>VueJS</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img class="logo-light" alt="Apple Logo" src="logos/apple.svg" />
-          <p>iOS</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img class="logo" alt="Android Logo" src="logos/android.svg" />
-          <p>Android</p>
-        </div>
-      </div>
-      <div class="col-lg-1 d-lg-block d-none"></div>
-
-      <div class="col-lg-1 d-lg-block d-none"></div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img
-            class="logo"
-            alt="Amazon Web Services Logo"
-            src="logos/aws.svg"
-          />
-          <p>Deployment</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img class="logo" alt="Shopify Logo" src="logos/shopify.svg" />
-          <p>Shopify</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img class="logo" alt="Wordpress Logo" src="logos/wordpress.svg" />
-          <p>Wordpress</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img class="logo" alt="MongoDB Logo" src="logos/mongodb.svg" />
-          <p>MongoDB</p>
-        </div>
-      </div>
-      <div class="col-lg-2 col-md-4 col-6">
-        <div class="technology">
-          <img class="logo" alt="MySQL Logo" src="logos/mysql.svg" />
-          <p>MySQL</p>
-        </div>
-      </div>
-      <div class="col-lg-1 d-lg-block d-none"></div>
-    </div>
-    <div class="row" style="margin-top: 36px">
-      <div class="col-12" style="display: flex; justify-content: center">
-        <p class="header-p">Featured in</p>
-      </div>
-      <div
-        class="col-12"
-        style="
-          display: flex;
-          justify-content: center;
-          padding-top: 12px;
-          padding-bottom: 12px;
-        "
-      >
-        <a
-          target="_blank"
-          href="https://www.designrush.com/agency/website-design-development"
-          ><img class="designrush" alt="Web Design" src="designrush.png"
-        /></a>
-      </div>
+      }
     </div>
   </div>
-</div>
+</section>

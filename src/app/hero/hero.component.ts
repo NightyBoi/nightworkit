@@ -1,45 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { delay, of } from 'rxjs';
-import { CtaComponent } from '../cta/cta.component';
-import { StateManagerService } from '../state-manager.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CtaComponent],
+  imports: [],
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss'
 })
-export class HeroComponent implements OnInit {
-
-  currentMoon: boolean = false;
-  moonChanged: boolean = false;
-  @Input() isPhone: boolean = false;
-
-  constructor(private stateManager: StateManagerService){}
+export class HeroComponent implements OnInit, OnDestroy {
+  lit = false;
+  private timer: ReturnType<typeof setTimeout> | null = null;
 
   ngOnInit(): void {
-        of(false)
-        .pipe(delay(2000))
-        .subscribe(
-          response => {
-            if(!this.moonChanged) {
-              this.stateManager.setMoon(true);
-              this.unblurMoon(true);
-            }
-          }
-        )
+    this.timer = setTimeout(() => { this.lit = true; }, 350);
   }
 
-  unblurMoon(moonBlurred: boolean){
-    this.moonChanged = true;
-    if(moonBlurred){
-      this.currentMoon = true;
-      this.stateManager.setMoon(true);
-    }else{
-      this.currentMoon = false;
-      this.stateManager.setMoon(false);
-    }
+  ngOnDestroy(): void {
+    if (this.timer) clearTimeout(this.timer);
   }
 
+  onLine1Hover(): void { this.lit = false; }
+  onLine2Hover(): void { this.lit = true; }
 }

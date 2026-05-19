@@ -1,92 +1,102 @@
 @import "../variables.scss";
 
-.tech-bg {
-  background-color: #0a0214;
-  padding-top: 100px;
-  padding-bottom: 50px;
-  margin-top: -8px;
+.tech-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-.col-6 {
-  display: flex;
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+
+  @media (max-width: 1024px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 640px)  { grid-template-columns: 1fr; }
 }
 
-.designrush {
-  max-width: 150px;
-}
+.cluster {
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: 24px;
+  transition: border-color .2s ease;
 
-h1 {
-  color: #ececec;
-  text-align: center;
-}
+  &:hover { border-color: rgba(139, 92, 246, 0.4); }
 
-.header-p {
-  color: #cccccc;
-  text-align: center;
-  margin-bottom: 0;
-}
-
-.technology {
-  min-width: 100%;
-  width: 100%;
-  background-color: #1c1c1c57;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  margin-bottom: 24px;
-}
-
-.technology p {
-  margin-bottom: 0;
-  color: #bbbbbb;
-  font-size: 0.8rem;
-  margin-top: 8px;
-  transition: all 0.5s ease;
-  text-align: center;
-}
-
-.logo-light {
-  max-height: 50px;
-  filter: contrast(0);
-  transition: all 0.5s ease;
-}
-
-.logo {
-  max-height: 50px;
-  filter: grayscale(1);
-  // transition: all .5s ease;
-}
-
-.technology:hover {
-  .logo {
-    filter: none;
-  }
-
-  .logo-light {
-    filter: brightness(0) saturate(100%) invert(100%) sepia(80%) saturate(0%)
-      hue-rotate(169deg) brightness(105%) contrast(101%);
+  h3 {
+    font-family: $font-display;
+    font-weight: 600;
+    font-size: 18px;
+    color: $text;
+    margin: 4px 0 8px;
+    letter-spacing: -0.01em;
   }
 
   p {
-    color: white;
+    font-family: $font-body;
+    font-size: 13px;
+    color: $muted;
+    line-height: 1.55;
+    margin-bottom: 18px;
   }
 }
 
-@media only screen and (max-width: 400px) {
-  .logo {
-    max-height: 30px;
-  }
-
-  .logo-light {
-    max-height: 30px;
-  }
+.cluster-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
 }
 
-@media only screen and (max-width: 768px) {
-  .tech-bg {
-    padding-top: 16px;
+.cluster-tag {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $violet-2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.cluster-logos {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.logo-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: $surface-2;
+  border: 1px solid $border;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: $font-body;
+  font-size: 12px;
+  color: $muted;
+  transition: all .2s ease;
+  cursor: default;
+
+  &:hover {
+    color: $text;
+    border-color: $border-2;
+  }
+
+  img {
+    height: 18px;
+    width: auto;
+    filter: grayscale(1);
+    transition: filter .2s ease;
+    display: inline-block;
+  }
+
+  &.light img { filter: contrast(0); }
+
+  &:hover img { filter: none; }
+
+  &.light:hover img {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(80%) saturate(0%) hue-rotate(169deg) brightness(105%) contrast(101%);
   }
 }

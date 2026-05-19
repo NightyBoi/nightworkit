@@ -1,156 +1,155 @@
-<div class="container-fluid" id="contact-us">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 d-none d-lg-block" style="padding-right: 80px">
-        <img
-          class="contact-img"
-          alt="The Milky Way stretches across the night sky, casting a celestial glow over the rugged mountain landscape."
-          src="stars.webp"
-        />
+<section class="section-pad" id="contact">
+  <div class="contact-container">
+    <div class="contact-grid">
+      <!-- Left column -->
+      <div class="contact-side">
+        <div class="section-eyebrow"><span class="bar"></span> Let's talk</div>
+        <h2>In a universe of agencies that overpromise, we'd rather tell you something doesn't need building.</h2>
+        <p class="side-lede">Tell us what you're trying to build. We'll reply with honest thoughts on scope, timeline, and whether we're even the right team for it.</p>
+
+        <div class="promise" #animTarget data-order="0">
+          <div class="promise-icon" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div>
+            <strong>We reply within 1 business day</strong>
+            <span>Usually faster. Always from a human, not an autoresponder.</span>
+          </div>
+        </div>
+
+        <div class="testimonial" #animTarget data-order="1">
+          <blockquote>"They told us our original idea was wrong, then helped us build the right one. We launched in six weeks."</blockquote>
+          <div class="who">
+            <div class="meta">
+              <b>Founder · retail SaaS</b>
+              <span>Engaged 2024 · Anonymized at client's request</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial" #animTarget data-order="2">
+          <blockquote>"Communicative, fast, and they actually care if the project succeeds, not just delivers."</blockquote>
+          <div class="who">
+            <div class="meta">
+              <b>Marketing Lead · e-commerce</b>
+              <span>Engaged 2023 · Anonymized at client's request</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-lg-6 col-form">
-        <h1 style="margin-bottom: 0">Let's get started</h1>
-        <div class="separator"></div>
-        <p>
-          Contact us for a free consultation call or chat, and let's start
-          turning your vision into reality.
-        </p>
 
-        <form
-          #contactForm="ngForm"
-          (ngSubmit)="formSubmit(contactForm, $event)"
-          style="position: relative"
-        >
-          <div class="row" style="margin-bottom: 0">
-            <div class="col-md-6" style="margin-bottom: 24px">
-              <input
-                #first_name="ngModel"
-                required
-                class="form-input"
-                [class.invalid]="first_name.touched && !first_name.valid"
-                type="text"
-                name="first_name"
-                placeholder="First name"
-                [(ngModel)]="contactDetails.first_name"
-              />
-              @if (first_name.touched && !first_name.valid) {
-              <p class="invalidp">First name is required.</p>
-              }
-            </div>
-            <div class="col-md-6" style="margin-bottom: 24px">
-              <input
-                #last_name="ngModel"
-                required
-                class="form-input"
-                type="text"
-                name="last_name"
-                placeholder="Last name"
-                [(ngModel)]="contactDetails.last_name"
-                [class.invalid]="last_name.touched && !last_name.valid"
-              />
-              @if (last_name.touched && !last_name.valid) {
-              <p class="invalidp">Last name is required.</p>
-              }
-            </div>
-          </div>
+      <!-- Right column: sticky form -->
+      <div class="form-card" [class.sent]="success">
+        <div class="form-content">
+          <h3 class="form-title">Tell us about your project</h3>
+          <p class="form-sub">Or email <a href="mailto:contact@nightworkit.com">contact&#64;nightworkit.com</a> directly.</p>
 
-          <div class="row">
-            <div class="col-12">
-              <input
-                #email="ngModel"
-                email
-                required
-                class="form-input"
-                type="email"
-                name="email"
-                placeholder="E-Mail"
-                [(ngModel)]="contactDetails.email"
-                [class.invalid]="
-                  (email.touched && email.value == '') ||
-                  (email.touched && !email.valid && submitted)
-                "
-              />
-              @if (email.touched && email.value == '') {
-              <p class="invalidp">Email is required.</p>
-              }@else if (email.touched && !email.valid && submitted){
-              <p class="invalidp">Invalid email address.</p>
+          <form #contactForm="ngForm" (ngSubmit)="formSubmit(contactForm, $event)" autocomplete="off" novalidate>
+            <div class="form-row-2">
+              <div class="field">
+                <input #first_name="ngModel" required type="text" id="f-fn" name="first_name"
+                       placeholder=" " [(ngModel)]="contactDetails.first_name"
+                       [class.invalid]="first_name.touched && first_name.invalid" />
+                <label for="f-fn">First name</label>
+                @if (first_name.touched && first_name.invalid) {
+                  <p class="invalidp">Required.</p>
+                }
+              </div>
+              <div class="field">
+                <input #last_name="ngModel" required type="text" id="f-ln" name="last_name"
+                       placeholder=" " [(ngModel)]="contactDetails.last_name"
+                       [class.invalid]="last_name.touched && last_name.invalid" />
+                <label for="f-ln">Last name</label>
+                @if (last_name.touched && last_name.invalid) {
+                  <p class="invalidp">Required.</p>
+                }
+              </div>
+            </div>
+
+            <div class="field">
+              <input #email="ngModel" email required type="email" id="f-em" name="email"
+                     placeholder=" " [(ngModel)]="contactDetails.email"
+                     [class.invalid]="email.touched && email.invalid" />
+              <label for="f-em">Work email</label>
+              @if (email.touched && email.invalid) {
+                <p class="invalidp">{{ email.value ? 'Invalid email.' : 'Required.' }}</p>
               }
             </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <select
-                aria-label="Project Length"
-                #project="ngModel"
-                required
-                class="form-input"
-                name="project_length"
-                [(ngModel)]="contactDetails.projectLength"
-                [class.invalid]="project.touched && project.invalid"
-              >
-                <option value="">Project length</option>
-                <option value="idk">I don't know</option>
-                <option value="1-3">1-3 months</option>
-                <option value="3-6">3-6 months</option>
+
+            <div class="field">
+              <select #project="ngModel" required id="f-pl" name="project_length"
+                      [(ngModel)]="contactDetails.projectLength"
+                      [class.invalid]="project.touched && project.invalid"
+                      [attr.data-empty]="!contactDetails.projectLength ? 'true' : 'false'">
+                <option value="" disabled hidden></option>
+                <option value="idk">I don't know yet</option>
+                <option value="1-3">1–3 months</option>
+                <option value="3-6">3–6 months</option>
                 <option value="6+">6+ months</option>
               </select>
+              <label for="f-pl">Project length</label>
               @if (project.touched && project.invalid) {
-              <p class="invalidp">Project length is required.</p>
+                <p class="invalidp">Required.</p>
               }
             </div>
-          </div>
 
-          <div class="row" style="margin-bottom: 8px">
-            <div class="col-12">
-              <textarea
-                #message="ngModel"
-                maxlength="500"
-                required
-                rows="4"
-                class="form-input"
-                name="message"
-                placeholder="Your message"
-                [(ngModel)]="contactDetails.message"
-                [class.invalid]="message.touched && message.invalid"
-              ></textarea>
-              @if (message.value?.length == 500) {
-              <p class="invalidp">
-                Message limit reached. For detailed or extensive project plans,
-                we recommend starting a conversation via email to collaborate
-                effectively.
-              </p>
-              } @if (message.touched && message.invalid) {
-              <p class="invalidp">Message is required.</p>
+            <div class="field">
+              <textarea #message="ngModel" required maxlength="500" rows="4" id="f-msg" name="message"
+                        placeholder=" " [(ngModel)]="contactDetails.message"
+                        [class.invalid]="message.touched && message.invalid"></textarea>
+              <label for="f-msg">Message</label>
+              @if (message.touched && message.invalid) {
+                <p class="invalidp">Required.</p>
+              }
+              @if (contactDetails.message.length === 500) {
+                <p class="invalidp">500 character limit reached.</p>
               }
             </div>
-          </div>
-          <p style="margin-bottom: 8px">
-            In a universe of endless possibilities, finding the right path can
-            be daunting. Let us be your guiding star.
-          </p>
-          @if (success) {
-          <p class="success-message">
-            The email has been sent successfully, we'll get back to you shortly.
-            Thank you for choosing us!
-          </p>
-          } @if (error) {
-          <p class="failure-message">
-            An error occured, please try again or contact us directly at
-            <a class="link" href="mailto:contact@nightworkit.com"
-              >contact&#64;nightworkit.com</a
-            >.
-          </p>
-          }
-          <div class="send-button">
-            <button type="submit" class="controls testing">Send</button>
-            @if (validSubmit) {
-            <div class="spinner">
-              <img style="width: 150px" src="spinner.svg" />
-            </div>
+
+            @if (error) {
+              <p class="error-msg">Send failed. Email us directly at <a href="mailto:contact@nightworkit.com">contact&#64;nightworkit.com</a>.</p>
             }
+
+            <div class="form-foot">
+              <button type="submit" class="btn-primary" [disabled]="validSubmit">
+                @if (validSubmit) { Sending… } @else { Send message }
+              </button>
+              <span class="form-meta">Prefer a call? <a href="#" (click)="openBooking($event)">Book 30 min with the founder →</a></span>
+            </div>
+          </form>
+        </div>
+
+        <!-- Success state -->
+        <div class="success-state">
+          <div class="check" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
           </div>
-        </form>
+          <h3>Message received. Thank you.</h3>
+          <p>We'll reply within 1 business day. While you wait:</p>
+          <div class="success-next">
+            <a href="#process" class="next-pill">See our process →</a>
+            <a href="#stack" class="next-pill">Browse the stack →</a>
+            <a href="mailto:contact@nightworkit.com" class="next-pill">Email us directly →</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+@if (bookingOpen) {
+  <div class="booking-back" [class.open]="bookingVisible" (click)="closeBooking()" role="dialog" aria-label="Book a call" aria-modal="true">
+    <div class="booking-modal" (click)="$event.stopPropagation()">
+      <button class="booking-close" (click)="closeBooking()" aria-label="Close">✕</button>
+      <iframe
+        src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3xVABnNaEGSa6jrUWuscYv3oWo7Hcgj58jiHbeY0O5fqe31x9Dzym4so5xokrF-hFetqKx6YpA?gv=true"
+        frameborder="0"
+        title="Book a 30-minute call with the founder">
+      </iframe>
+    </div>
+  </div>
+}

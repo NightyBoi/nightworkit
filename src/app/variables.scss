@@ -1,6 +1,51 @@
-$brand-primary: #7232c6ff;
-// $brand-primary: #AE82E8ff;
-$brand-secondary: #664394ff;
-$brand-tertiary: #4e3f61ff;
-$background-primary: #2f2b33ff;
+// ===== Design Tokens — Night Work IT Modernized =====
+
+// Backgrounds
+$bg:        #0a0214;
+$bg-2:      #100620;
+$surface:   #14091f;
+$surface-2: #1c0d2b;
+
+// Borders
+$border:    rgba(255, 255, 255, 0.08);
+$border-2:  rgba(255, 255, 255, 0.14);
+
+// Text
+$text:  #f3eefa;
+$muted: #b8aece;
+$dim:   #8478a0;
+
+// Brand violet
+$violet:   #8b5cf6;
+$violet-2: #a78bfa;
+$violet-3: #c4b5fd;
+$indigo:   #6366f1;
+
+// Orange — reserved accent. Only in:
+//   - Services + Process section eyebrows
+//   - Services "Learn more" link + card hover icon
+//   - Process launcher card + button + WebGL hint dot
+//   - About founder-kicker text
+//   - Footer "Last shipped" live dot
+$orange:   #f4a261;
+$orange-2: #ffb88e;
+
+// Typography families
+$font-display: 'Montserrat', system-ui, sans-serif;
+$font-body:    'Inter', system-ui, sans-serif;
+$font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+// Spacing & Radii
+$radius-sm: 8px;
+$radius:    14px;
+$radius-lg: 22px;
+
+$section-pad-desktop: 110px;
+$section-pad-mobile:  72px;
+
+// Legacy aliases kept for existing code
+$brand-primary:        $violet;
+$brand-secondary:      #664394ff;
+$brand-tertiary:       #4e3f61ff;
+$background-primary:   $bg;
 $background-secondary: #2c2633ff;

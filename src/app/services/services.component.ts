@@ -1,61 +1,102 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+interface Service {
+  key: string;
+  title: string;
+  short: string;
+  desc1: string;
+  desc2: string;
+  tags: string[];
+  iconPath: string;
+}
 
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './services.component.html',
   styleUrl: './services.component.scss'
 })
 export class ServicesComponent {
-  activeIndex: number = 0;
-  fadeIn: boolean = false;
-  fadeOut: boolean = false;
+  activeModal: Service | null = null;
+  modalVisible = false;
+  private closeTimer: ReturnType<typeof setTimeout> | null = null;
 
-  services = [{
-    service: "Web Design",
-    description_1: "Every element we design—from layout to color schemes, typography to navigation—aims to provide a seamless user experience that keeps visitors on your site and encourages interaction. Our approach combines creativity with functionality, ensuring that your website isn't just beautiful but also optimized for usability, mobile-friendliness, and SEO.",
-    description_2: "Whether you're launching a new brand, refreshing an existing one, or building an e-commerce platform, our team collaborates with you every step of the way to deliver a pixel perfect design that aligns with your vision and business goals.",
-    image_path: "./web-design.webp",
-    image_alt: "A laptop featuring a sketching screen, showcasing creative design and digital artistry capabilities."
-  }, {
-    service: "Web Development",
-    description_1: "With a focus on both the front end, back end and a professionally designed database, we ensure that your site not only looks good but works seamlessly, providing a smooth experience for your users.",
-    description_2: "Our development process is thorough and collaborative, involving you in each step to tailor features that align with your unique business needs. From e-commerce and content management systems to interactive web applications, we leverage the latest technologies and best practices to make your site adaptable, responsive, and future-ready.",
-    image_path: "./web-development.webp",
-    image_alt: "Two individuals collaborating at computer screens in a modern office environment, focused on their web development tasks."
-  }, {
-    service: "E-commerce Solutions",
-    description_1: "From intuitive product catalogs and secure payment processing to inventory management and user-friendly checkouts, every element is optimized to enhance conversion rates and customer satisfaction. We work closely with you to understand your unique requirements and brand identity, ensuring the final product not only meets but exceeds your expectations.",
-    description_2: "Our team integrates the latest e-commerce technologies and best practices, including mobile responsiveness, SEO optimization, and analytics, so your store is always ahead of the curve.",
-    image_path: "./e-commerce.webp",
-    image_alt: "A guide illustrating the steps to integrate credit cards on a shopify website for seamless online transactions."
-  }, {
-    service: "Website Maintenance and Support",
-    description_1: "We understand that your website is a crucial part of your business, so we handle everything from regular updates and security patches to performance monitoring and troubleshooting.",
-    description_2: "Our proactive approach means we're constantly scanning for potential issues and optimizing your site's performance, so it always provides the best experience for your users. Whether it's adding new features, managing backups, or handling unexpected downtime, our team is dedicated to keeping your site running smoothly and efficiently.",
-    image_path: "./maintenance.webp",
-    image_alt: "Screenshot of a web browser displaying a list of various website tasks and updates for selection or review."
-  }, {
-    service: "Custom Solutions",
-    description_1: "We know that not every project fits into a standard mold, which is why we offer flexible, innovative IT solutions designed specifically for your needs. Whether you require a specialized web application, custom integrations, advanced data processing, or unique functionality, we're here to make it happen.",
-    description_2: "With Night Work IT's custom approach, you get more than a one-size-fits-all answer; you get a solution built around your success.",
-    image_path: "./custom.webp",
-    image_alt: "A pair of people at a table, utilizing a laptop and a pen, suggesting a focused discussion or project work."
+  services: Service[] = [
+    {
+      key: 'design',
+      title: 'Web Design',
+      short: 'Layouts that feel as good as they look, and convert.',
+      desc1: 'We design sites that actually convert, not award-winning portfolios that confuse the people who need to buy something. Layouts built around what your users are trying to do, not around what looked impressive in the design sprint.',
+      desc2: 'One team does the whole thing. No hand-offs between a design agency and a dev shop, no miscommunication in the middle, no extra invoice for "design QA". Brand, layout, mobile, performance: covered.',
+      tags: ['UX', 'UI', 'Brand', 'Prototype'],
+      iconPath: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5'
+    },
+    {
+      key: 'code',
+      title: 'Web Development',
+      short: 'Sites that look polished and run like infrastructure.',
+      desc1: 'We build what we design and design what we build. No miscommunication between a wireframe shop and a dev house. The same people who drew it ship it. Front end, back end, database, the whole thing.',
+      desc2: 'React, Angular, Node, whatever the project actually needs. We don\'t have a favourite framework we push onto every client. We use what\'s right for the scale, the timeline, and the budget in front of us.',
+      tags: ['React', 'Angular', 'Node', 'TypeScript'],
+      iconPath: 'M16 18l6-6-6-6M8 6l-6 6 6 6'
+    },
+    {
+      key: 'cart',
+      title: 'E-commerce',
+      short: 'Stores built around the checkout, not around the homepage.',
+      desc1: 'We build stores around the checkout, not the homepage. Every decision (catalogue layout, payment flow, mobile UX) gets weighed against one question: does this make someone more or less likely to complete a purchase?',
+      desc2: 'Shopify, headless, or custom. We\'ll scope it honestly and tell you which is overkill for your current stage. No upsells dressed up as best practice. No platform lock-in we benefit from.',
+      tags: ['Shopify', 'Headless', 'Payments', 'Analytics'],
+      iconPath: 'M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0'
+    },
+    {
+      key: 'shield',
+      title: 'Maintenance & Support',
+      short: 'Keep what you have fast, secure, and quietly improving.',
+      desc1: 'We handle the boring-but-critical stuff so you don\'t have to think about it: security patches, uptime monitoring, performance, and the thing that breaks at 11pm on a Friday.',
+      desc2: 'No support ticket queues. No three-day SLA on a fix that takes ten minutes. We work lean, which means you get actual response times, not promises buried in a contract you signed six months ago.',
+      tags: ['SLA', 'Monitoring', 'Backups', 'Security'],
+      iconPath: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'
+    },
+    {
+      key: 'saas',
+      title: 'SaaS Development',
+      short: 'From zero to paying users, built to scale from day one.',
+      desc1: 'We build SaaS products end to end: architecture, billing, auth, dashboards, the works. No cutting corners that you\'ll pay for in six months. No over-engineering a feature set nobody\'s paid for yet.',
+      desc2: 'Post-launch we stay close: shipping features, watching metrics, scaling what needs it. We\'ve seen enough early-stage products to know which shortcuts are fine and which ones quietly kill companies.',
+      tags: ['Multi-tenant', 'Billing', 'Auth', 'API', 'Dashboards'],
+      iconPath: 'M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z'
+    },
+    {
+      key: 'spark',
+      title: 'Custom Solutions',
+      short: 'Anything else. If it can be coded, we\'ll scope it.',
+      desc1: 'If you can describe the problem in plain language, we can scope a build for it. Integrations, automation, internal tools, data pipelines. If software can solve it, we\'ll figure out how.',
+      desc2: 'We\'d rather hear "we have this weird problem" than "we need a [trending tech term] solution". Start with the problem. We\'ll work backwards to the right build and tell you honestly if the answer is simpler than you think.',
+      tags: ['Integrations', 'Automation', 'R&D'],
+      iconPath: 'M5 3l14 9-14 9V3z'
+    }
+  ];
+
+  openModal(svc: Service): void {
+    if (this.closeTimer) clearTimeout(this.closeTimer);
+    this.activeModal = svc;
+    document.body.style.overflow = 'hidden';
+    // Defer by one frame so @if renders the DOM in its initial state
+    // before .open is applied — otherwise the CSS transition is skipped
+    setTimeout(() => { this.modalVisible = true; });
   }
-];
 
-  activeService = this.services[0];
-
-  switchService(index: number){
-    this.activeIndex = index;
-    this.fadeIn = false;
-    this.fadeOut = true;
-
-    setTimeout(() => {
-      this.fadeIn =  true;
-      this.fadeOut = false;
-      this.activeService = this.services[index];
-    }, 200)
+  closeModal(): void {
+    this.modalVisible = false;
+    this.closeTimer = setTimeout(() => {
+      this.activeModal = null;
+      document.body.style.overflow = '';
+    }, 320);
   }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void { if (this.modalVisible) this.closeModal(); }
 }
