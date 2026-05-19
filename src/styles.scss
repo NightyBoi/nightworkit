@@ -142,6 +142,27 @@ button {
   line-height: 1.6;
 }
 
+// 3D scene overlay buttons — hover/active must be global because CSS2DRenderer
+// moves these elements outside Angular's scoped CSS at runtime
+#prev, #next {
+  transition: opacity 1s ease, border-color .2s ease, color .2s ease, box-shadow .2s ease;
+  &:hover {
+    border-color: rgba(167, 139, 250, 0.7) !important;
+    color: #c4b5fd !important;
+    box-shadow: 0 0 16px -4px rgba(139, 92, 246, 0.45);
+  }
+  &:active { transform: scale(0.95); }
+}
+
+#reset {
+  transition: opacity 1s ease, border-color .2s ease, color .2s ease;
+  &:hover {
+    border-color: rgba(139, 92, 246, 0.55) !important;
+    color: #a78bfa !important;
+  }
+  &:active { transform: scale(0.9); }
+}
+
 // Global reduced-motion + mobile animation safeguards
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
