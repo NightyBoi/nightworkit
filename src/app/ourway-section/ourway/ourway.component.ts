@@ -50,6 +50,7 @@ export class OurwayComponent implements OnInit {
 
   cameraView = 45;
   containerWidth!: number;
+  containerHeight = 480;
   aspect!: number;
   camera!: THREE.OrthographicCamera;
   animFix = true;
@@ -200,6 +201,7 @@ export class OurwayComponent implements OnInit {
       this.container.nativeElement.clientWidth -
       parseFloat(containerStyles.paddingLeft) -
       parseFloat(containerStyles.paddingRight);
+    this.containerHeight = this.container.nativeElement.clientHeight || 480;
     window.addEventListener('resize', () => this.onResize());
     this.aspect = (this.containerWidth / 880) * 1.75;
     this.camera = new THREE.OrthographicCamera(
@@ -212,7 +214,7 @@ export class OurwayComponent implements OnInit {
     );
     this.renderScene = new RenderPass(this.scene, this.camera);
     this.bloomPass = new UnrealBloomPass(
-      new THREE.Vector2(this.containerWidth, 500),
+      new THREE.Vector2(this.containerWidth, this.containerHeight),
       1.6,
       0.1,
       0.1,
@@ -247,7 +249,7 @@ export class OurwayComponent implements OnInit {
     });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     //this.renderer.setSize(window.innerWidth, 400);
-    this.renderer.setSize(this.containerWidth, 500);
+    this.renderer.setSize(this.containerWidth, this.containerHeight);
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1;
   }
@@ -312,7 +314,7 @@ export class OurwayComponent implements OnInit {
     this.nextObj.layers.set(0);
     this.scene.add(this.nextObj);
 
-    this.labelRenderer.setSize(this.containerWidth, 500);
+    this.labelRenderer.setSize(this.containerWidth, this.containerHeight);
     this.labelRenderer.domElement.style.position = 'absolute';
 
     // Position the labelRenderer to align with the canvas
@@ -362,20 +364,19 @@ export class OurwayComponent implements OnInit {
     };
 
     this.manager.onLoad = () => {
-      this.isLoaded = true;
       this.loadScene.remove(this.loadingObj);
       this.availablePlanets.push(
         this.planets.find((element) => element.name == 'planet1'),
       );
-      //console.log( 'Loading complete!');
       this.mainScene = this.scene;
+      this.isLoaded = true;
     };
 
     this.manager.onProgress = (url, itemsLoaded, itemsTotal) => {
       this.fillElem.nativeElement.style.width =
         (itemsLoaded / itemsTotal) * 100 + '%';
       this.loadLabelElem.nativeElement.innerText =
-        'Loading... (' + itemsLoaded + ' of ' + itemsTotal + ' objects)';
+        itemsLoaded + ' / ' + itemsTotal + ' objects';
       //console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
     };
 
@@ -452,7 +453,7 @@ export class OurwayComponent implements OnInit {
 
   initPostProcessing() {
     this.composer = new EffectComposer(this.renderer);
-    this.composer.setSize(this.containerWidth, 500);
+    this.composer.setSize(this.containerWidth, this.containerHeight);
     this.composer.addPass(this.renderScene);
     this.composer.addPass(this.bloomPass);
   }
@@ -931,9 +932,10 @@ export class OurwayComponent implements OnInit {
       this.container.nativeElement.clientWidth -
       parseFloat(containerStyles.paddingLeft) -
       parseFloat(containerStyles.paddingRight);
+    this.containerHeight = this.container.nativeElement.clientHeight || this.containerHeight;
     // Update renderer size
-    this.renderer.setSize(this.containerWidth, 500);
-    this.labelRenderer.setSize(this.containerWidth, 500);
+    this.renderer.setSize(this.containerWidth, this.containerHeight);
+    this.labelRenderer.setSize(this.containerWidth, this.containerHeight);
 
     this.aspect = (this.containerWidth / 880) * 1.75;
 
@@ -946,7 +948,7 @@ export class OurwayComponent implements OnInit {
     this.camera.updateProjectionMatrix();
 
     // Update composer size if using post-processing
-    this.composer.setSize(this.containerWidth, 500);
+    this.composer.setSize(this.containerWidth, this.containerHeight);
   }
 
   getSprite({

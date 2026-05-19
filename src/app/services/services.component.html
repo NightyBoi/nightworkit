@@ -1,62 +1,54 @@
-<div class="container-fluid">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <h1 id="services">Our Services</h1>
-                <p>Explore our wide range of IT solutions, designed to do more than just solve problems. We focus on creating impactful experiences that match your vision and help you achieve your goals.</p>
-                <div class="row" style="margin-bottom: 24px;">
-                    <div class="col-sm-6">
-                        <a href="#service"><button (click)="switchService(0)" class="service" [class.active]="activeIndex == 0">
-                            <h2 class="service-titles">Web Design</h2>
-                            <p>
-                                Our web design turns ideas into engaging digital experiences. We blend creativity with usability.
-                            </p>
-                        </button></a>
-                    </div>
-                    <div class="col-sm-6 column-offset">
-                        <a href="#service"><button (click)="switchService(1)" class="service" [class.active]="activeIndex == 1">
-                            <h2 class="service-titles">Web Development</h2>
-                            <p>
-                                At Night Work IT, we craft web experiences that do more than look good—they work hard for your business.
-                            </p>
-                        </button></a>
-                    </div>
-                </div>
-                <div class="row" style="margin-bottom: 24px;">
-                    <div class="col-sm-6">
-                        <a href="#service"><button (click)="switchService(2)" class="service" [class.active]="activeIndex == 2">
-                            <h2 class="service-titles">E-commerce Solutions</h2>
-                            <p>
-                                Our E-commerce Solutions provide everything you need for a seamless, secure shopping experience.
-                            </p>
-                        </button></a>
-                    </div>
-                    <div class="col-sm-6 column-offset">
-                        <a href="#service"><button (click)="switchService(3)" class="service" [class.active]="activeIndex == 3">
-                            <h2 class="service-titles">Website Maintenance and Support</h2>
-                            <p>
-                                Keeps your site secure, up-to-date, and running smoothly, so you can focus on your business while we handle updates.
-                            </p>
-                        </button></a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <a href="#service"><button (click)="switchService(4)" class="service" [class.active]="activeIndex == 4">
-                            <h2 class="service-titles">Custom Solutions</h2>
-                            <p>Don't see what you're looking for? Reach out, and let's see how we can help.</p>
-                        </button></a>
-                    </div>
-                </div>
-                
-            </div>
-            <div id="service" class="col-lg-6 service-info" [class.fade-in]="fadeIn" [class.fade-out]="fadeOut">
-                <img class="service-img" [alt]="activeService.image_alt" [src]="activeService.image_path" >
-                <h2 style="align-self: flex-start;">{{activeService.service}}</h2>
-                <div class="separator"></div>
-                <p>{{activeService.description_1}}</p>
-                <p>{{activeService.description_2}}</p>
-            </div>
-        </div>
+<section class="section-pad" id="services">
+  <div class="svc-container">
+    <div class="services-head">
+      <div>
+        <div class="section-eyebrow orange-eyebrow"><span class="bar orange-bar"></span> What we do</div>
+        <h2 class="section-h">Six ways we can help you ship.</h2>
+      </div>
+      <p class="section-lede">
+        Pick one or stack them. Every engagement starts with a free 30-minute call so we can tell you honestly whether we're the right fit.
+      </p>
     </div>
-</div>
+
+    <div class="services-grid">
+      @for (svc of services; track svc.key) {
+        <div class="svc-card" (click)="openModal(svc)" role="button" tabindex="0"
+             (keydown.enter)="openModal(svc)" (keydown.space)="openModal(svc)">
+          <div class="svc-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path [attr.d]="svc.iconPath"/>
+            </svg>
+          </div>
+          <div class="svc-title">{{ svc.title }}</div>
+          <p class="svc-desc">{{ svc.short }}</p>
+          <span class="svc-learn">Learn more <span class="learn-arrow">→</span></span>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Modal backdrop -->
+@if (activeModal) {
+  <div class="modal-back" [class.open]="modalVisible" (click)="closeModal()" role="dialog"
+       [attr.aria-label]="activeModal.title" aria-modal="true">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeModal()" aria-label="Close">✕</button>
+      <div class="modal-icon" aria-hidden="true">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path [attr.d]="activeModal.iconPath"/>
+        </svg>
+      </div>
+      <h2>{{ activeModal.title }}</h2>
+      <p>{{ activeModal.desc1 }}</p>
+      <p>{{ activeModal.desc2 }}</p>
+      <div class="modal-tags">
+        @for (tag of activeModal.tags; track tag; let i = $index) {
+          <span class="modal-tag" [style.animation-delay]="(180 + i * 50) + 'ms'">{{ tag }}</span>
+        }
+      </div>
+    </div>
+  </div>
+}

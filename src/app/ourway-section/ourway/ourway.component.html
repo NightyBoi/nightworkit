@@ -1,8 +1,6 @@
-<div #container style="overflow: hidden;">
+<div #container style="overflow: hidden; width: 100%; height: 100%;">
     <div class="row">
         <div class="col-12" style="position: relative;">
-            <div class="fadein"></div>
-            <div class="fadeout"></div>
             <div id="label" class="disabled" #label style="color: white; opacity: 0;">
                 <h1>Contact Us</h1>
                 <p style="max-width: 500px;">Reaching out to us is the first step toward bringing your vision to life. Whether you have a detailed project in mind or just a spark of an idea, our team is here to listen. Fill out our contact form, give us a call, or send us an email, and we will respond promptly to discuss how we can help you achieve your goals. </p>
@@ -32,11 +30,12 @@
                   
             </canvas>
             
-            <div #loadingBar id="loadingBar" style="width: 80%; max-width: 700px;">
-                <h2 #loadingLabel id="loadingLabel" style="color:  white;">Loading...</h2>
-                <div style="background-color: #333333; width: 100%; height: 30px;">
-                    <div #loadingFill id="loadingFill" style="background-color: #ffffff; height: 30px; width: 0"></div>
-                </div>
+            <div #loadingBar id="loadingBar" style="width:300px;display:flex;flex-direction:column;align-items:center;gap:12px;padding:28px 24px;background:rgba(10,2,20,0.85);border:1px solid rgba(139,92,246,0.22);border-radius:18px;backdrop-filter:blur(16px);box-shadow:0 0 60px -10px rgba(139,92,246,0.28),0 0 0 1px rgba(139,92,246,0.07);">
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8b5cf6;letter-spacing:0.22em;text-transform:uppercase;">Initialising scene</div>
+              <div style="position:relative;width:100%;height:3px;background:rgba(255,255,255,0.1);border-radius:999px;">
+                <div #loadingFill id="loadingFill" style="position:absolute;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#6366f1,#8b5cf6,#a78bfa);border-radius:999px;transition:width 0.3s ease;"></div>
+              </div>
+              <span #loadingLabel id="loadingLabel" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8478a0;letter-spacing:0.1em;">Loading…</span>
             </div>
             
             <button id="reset" class="disabled" #reset (click)="resetCamera()" class="testing3" style="opacity: 0"><span class="glow">X</span></button>

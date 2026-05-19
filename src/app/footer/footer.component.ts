@@ -1,16 +1,13 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-  currentYear: number = 2024;
-
-  constructor(){
-    this.currentYear = new Date().getFullYear();
-  }
+  currentYear = new Date().getFullYear();
 }

@@ -1,38 +1,68 @@
 @import "../variables.scss";
 
-.container-fluid{
-    background-color: $brand-primary;
-    padding-top: 20px;
-    padding-bottom: 20px;
+.stats {
+  border-top: 1px solid $border;
+  border-bottom: 1px solid $border;
+  padding: 60px 0;
+  background: linear-gradient(180deg, rgba(139, 92, 246, 0.02), transparent);
 }
 
-.title{
-    font-weight: 700;
+.stats-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-.info{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: center;
-    color: #ececec;
-    margin: 16px 0;
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 0;
+  }
 }
 
-.comment{
-    font-style: italic;
-    font-size: .8rem;
+.stat-cell {
+  padding: 0 32px;
+  border-left: 1px solid $border;
+  text-align: left;
+
+  &:first-child {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  @media (max-width: 768px) {
+    border-left: none !important;
+    padding-left: 0;
+  }
 }
 
-p{
-    font-size: calc(1.3rem + 0.6vw);
-    font-weight: 500;
-    line-height: 1.2;
+.stat-num {
+  font-family: $font-display;
+  font-size: clamp(2.1rem, 3.2vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: $text;
+  line-height: 1;
+
+  .unit { color: $violet-2; }
 }
 
-@media (min-width: 1200px) {
-    p {
-        font-size: 1.75rem;
-    }
+.stat-label {
+  font-family: $font-body;
+  font-size: 14px;
+  color: $text;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+.stat-meta {
+  font-family: $font-mono;
+  font-size: 11px;
+  color: $dim;
+  margin-top: 4px;
+  letter-spacing: 0.06em;
 }

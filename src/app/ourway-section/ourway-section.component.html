@@ -1,30 +1,91 @@
-<div class="container-fluid" style="background: #0a0214; padding-bottom: 30px; padding-top: 60px; margin-top: -2px; margin-bottom: -1px;">
-    <div class="container">
-        <div class="row ourway-row">
-            <div class="col-12" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
-                <h1 style="text-align: center; color: #ececec; margin-bottom: 20px;">Take a look at our process.</h1>
-                @if (!isPhone) {
-                    <p style="text-align: center; color: #ececec;">Launch the app and click the highlighted planet to begin your journey with us. Explore each phase of our workflow as you navigate through the planets, discovering what it's like to work with our team. Reach the moon to see where we'll take your project — to new heights!</p>
-                }
-            </div>
-        </div>
-    </div>
-    @if (isPhone) {
-        @defer () {
-            <app-ourway-mobile></app-ourway-mobile> 
-        }
-    }
-    
-</div>
-    @if (!isPhone) {
+<section class="section-pad ourway-section" id="process">
+  <div class="ourway-container">
+    <div class="section-eyebrow orange-eyebrow"><span class="bar orange-bar"></span> Our process</div>
+    <h2 class="section-h">Five planets. One launch.</h2>
+    <p class="section-lede">
+      Every project follows the same five phases. What changes is how deep we go on each. Here's the whole arc in plain language.
+    </p>
 
-        @if(!appStarted){
-            <div class="start-button-wrapper">
-                <div class="fadein"></div>
-                <div class="fadeout"></div>
-                <button class="controls testing" (click)="startApp()">Start The Journey</button>
-            </div>
-        }@else{
-            <app-ourway></app-ourway>
-        }   
+    <!-- Always-visible phase track -->
+    <div class="phase-track">
+      <div class="phase">
+        <div class="phase-planet phase-1"></div>
+        <div class="phase-num">01 · Discovery</div>
+        <h3>Questions first</h3>
+        <p>We start with what you're actually trying to accomplish, and whether software is even the right answer.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-planet phase-2"></div>
+        <div class="phase-num">02 · Design</div>
+        <h3>Sketch &amp; system</h3>
+        <p>Wireframes before pixels. We design the user flow before we design the screenshot.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-planet phase-3"></div>
+        <div class="phase-num">03 · Build</div>
+        <h3>Two-week loops</h3>
+        <p>Real, deployed progress every check-in. No "it'll be done when it's done." You see it move.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-planet phase-4"></div>
+        <div class="phase-num">04 · Launch</div>
+        <h3>Soft, then loud</h3>
+        <p>Test, fix, soft-launch, watch. We don't hand over a URL and vanish on launch day.</p>
+      </div>
+      <div class="phase">
+        <div class="phase-planet phase-5"></div>
+        <div class="phase-num">05 · Orbit</div>
+        <h3>We stick around</h3>
+        <p>Most of our best work happens in the first year after launch. We're there for it.</p>
+      </div>
+    </div>
+
+    <!-- Desktop-only journey launcher -->
+    @if (isDesktop) {
+      <div class="journey-launcher">
+        <div class="journey-meta">
+          <div class="journey-label">Want the scenic route?</div>
+          <h3>Take the interactive tour</h3>
+          <p>Fly between the five planets in 3D. Same five phases, with a bit more depth and a lot more stars.</p>
+          <div class="journey-three-hint">
+            <span class="gpu-dot" aria-hidden="true"></span>
+            Desktop only · uses WebGL · ~1.2 MB
+          </div>
+        </div>
+        <button class="journey-btn" #launchBtn (click)="launchJourney()" aria-label="Launch the interactive 3D journey">
+          Launch the journey
+        </button>
+      </div>
     }
+  </div>
+
+  <!-- Desktop-only Three.js stage -->
+  @if (isDesktop) {
+    <div class="ourway-stage-wrapper">
+      <div class="ourway-stage">
+        <div class="planets-bg" aria-hidden="true"></div>
+
+        @if (journeyStarted) {
+          @defer (on immediate) {
+            <app-ourway></app-ourway>
+          } @loading {
+            <div class="three-slot">
+              <p class="three-caption">Loading three.js scene…</p>
+            </div>
+          }
+        } @else {
+          <div class="three-slot">
+            <div class="three-orbits" aria-hidden="true">
+              <span class="o-planet o-1"></span>
+              <span class="o-planet o-2"></span>
+              <span class="o-planet o-3"></span>
+              <span class="o-planet o-4"></span>
+              <span class="o-planet o-5"></span>
+            </div>
+            <p class="three-caption">A ThreeJS scene mounts here · click "Launch the journey" above</p>
+          </div>
+        }
+      </div>
+    </div>
+  }
+</section>

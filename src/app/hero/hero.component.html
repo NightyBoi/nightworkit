@@ -1,34 +1,62 @@
-<div class="container-fluid hero-bg">
-    <div class="container phone-scale">
-        <div class="row">
-            <div class="col-12">
-                <img class="img-fluid header-logo" alt="Night Work IT Logo white" [class.activeM]="currentMoon" src="logo.png"/>
-            </div>
+<section class="hero" [class.lit]="lit" id="hero">
+  <div class="stars-layer" aria-hidden="true"></div>
+  <div class="stars-layer layer-2" aria-hidden="true"></div>
+
+  <div class="hero-container">
+    <div class="hero-grid">
+      <!-- Left: copy -->
+      <div class="hero-copy">
+        <div class="eyebrow">
+          <span class="pulse" aria-hidden="true"></span>
+          <span>Now booking Q3 2026 projects</span>
         </div>
-        <div class="row hero-row">
-            <div class="col-md-6 order-md-first motto-col" style="margin-bottom: 10px; margin-top: 10px;">
-                <h1 class="hero-title" [class.blurred-text]="currentMoon" (mouseover)="unblurMoon(false)">Lost in digital dilemmas?</h1>
-                <h1 class="hero-subtitle" [class.blurred-text]="!currentMoon" (mouseover)="unblurMoon(true)">Emerge into the light with
-                    <span class="highlight">Night Work IT</span> solutions.</h1>
-                <app-cta class="activeN" [class.activeM]="currentMoon"></app-cta>
-            </div>
-            <div class="col-md-6 order-first order-md-last" style="display: flex; justify-content: center; ">
-                <div class="moon" [class.moon-active]="currentMoon" style="flex-grow: 0; flex-shrink: 0;">
-                    <div class="star-1"></div>
-                    <div class="star-2"></div> 
-                  </div>
-            </div>
+
+        <h1>
+          <span (mouseenter)="onLine1Hover()">Lost in digital <span class="accent">dilemmas?</span></span>
+          <span class="line-2" (mouseenter)="onLine2Hover()">Emerge into the light with Night Work IT.</span>
+        </h1>
+
+        <p class="hero-sub">
+          We're a small studio in Novi Sad. No account managers between you and the people writing the code. No ideas stuck in committee. We build web, SaaS, and e-commerce for founders who want to ship, not storyboard.
+        </p>
+
+        <div class="cta-row">
+          <a href="#contact" class="btn-primary">
+            Start a project
+            <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="#process" class="btn-ghost">See how we work</a>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="mouse_scroll" [class.activeM]="currentMoon">
-                    <div>
-                        <span class="m_scroll_arrows unu"></span>
-                        <span class="m_scroll_arrows doi"></span>
-                        <span class="m_scroll_arrows trei"></span>
-                    </div>
-                </div>
-            </div>
+
+        <div class="trust-row">
+          <span class="trust-dot" aria-hidden="true"></span>
+          <span>Trusted by founders across the EU and US</span>
+          <span class="sep" aria-hidden="true"></span>
+          <span>Founded 2022 · Novi Sad, RS</span>
         </div>
+      </div>
+
+      <!-- Right: moon scene -->
+      <div class="moon-scene" aria-hidden="true">
+        <div class="orbit"><span class="satellite"></span></div>
+        <div class="moon-glow"></div>
+        <div class="moon">
+          <span class="crater c1"></span>
+          <span class="crater c2"></span>
+          <span class="crater c3"></span>
+          <span class="crater c4"></span>
+          <span class="crater c5"></span>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
+
+  <a href="#about" class="scroll-indicator" aria-label="Scroll to next section">
+    <span class="scroll-label">Scroll</span>
+    <span class="chevron"></span>
+    <span class="chevron"></span>
+    <span class="chevron"></span>
+  </a>
+</section>

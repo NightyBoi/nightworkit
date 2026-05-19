@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { StateManagerService } from '../state-manager.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-about',
@@ -9,8 +8,4 @@ import { StateManagerService } from '../state-manager.service';
   templateUrl: './about.component.html',
   styleUrl: './about.component.scss'
 })
-export class AboutComponent {
-
-  constructor(){}
-
-}
+export class AboutComponent {}
