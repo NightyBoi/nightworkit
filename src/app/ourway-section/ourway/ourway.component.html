@@ -1,46 +1,102 @@
-<div #container style="overflow: hidden; width: 100%; height: 100%;">
-    <div class="row">
-        <div class="col-12" style="position: relative;">
-            <div id="label" class="disabled" #label style="color: white; opacity: 0;">
-                <h1>Contact Us</h1>
-                <p style="max-width: 500px;">Reaching out to us is the first step toward bringing your vision to life. Whether you have a detailed project in mind or just a spark of an idea, our team is here to listen. Fill out our contact form, give us a call, or send us an email, and we will respond promptly to discuss how we can help you achieve your goals. </p>
+<div #container style="overflow: hidden; width: 100%; height: 100%; position: relative;" (pointermove)="onPointerMove($event)">
+
+    <!-- Phase label cards -->
+    <div id="label" class="disabled" #label style="pointer-events:none;opacity:0;transition:opacity 1s ease;width:360px;">
+        <div class="label-inner" style="padding:20px 24px;background:rgba(6,1,14,0.36);border:1px solid rgba(139,92,246,0.25);border-radius:14px;backdrop-filter:blur(28px);box-shadow:0 0 40px -12px rgba(139,92,246,0.35),inset 0 1px 0 rgba(167,139,250,0.1),inset 3px 0 0 rgba(139,92,246,0.5);position:relative;overflow:hidden;">
+            <div class="label-scan"></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                <span style="width:5px;height:5px;border-radius:50%;background:#8b5cf6;box-shadow:0 0 6px #8b5cf6;flex-shrink:0;display:inline-block;"></span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8b5cf6;letter-spacing:0.2em;text-transform:uppercase;">01 · Discovery</span>
             </div>
-            <div id="label2" class="disabled" #label2 style="color: white; opacity: 0;">
-                <h1>Schedule a Meeting</h1>
-                <p style="max-width: 500px;">Once we've received your inquiry, we'll schedule a meeting at your convenience. This meeting can be held virtually or in person, depending on your preference. During this time, we’ll get to know more about your project, understand your needs, and discuss how our services can best support you.</p>
-            </div>
-            <div id="label3" class="disabled" #label3 style="color: white; opacity: 0;">
-                <h1>Analyze and Brainstorm</h1>
-                <p style="max-width: 500px;">After our initial meeting, our team will dive deep into analyzing your requirements. We’ll brainstorm creative and effective solutions tailored to your project. This collaborative phase ensures that all ideas are explored, and the best strategies are developed to meet your objectives.</p>
-            </div>
-            <div id="label4" class="disabled" #label4 style="color: white; opacity: 0;">
-                <h1>Development and Testing</h1>
-                <p style="max-width: 500px;">With a solid plan in place, we move into the development phase. Our skilled developers will bring your project to life, ensuring that every aspect is crafted with precision. Rigorous testing is conducted throughout this phase to ensure functionality, usability, and performance meet the highest standards.</p>
-            </div>
-            <div id="label5" class="disabled" #label5 style="color: white; opacity: 0;">
-                <h1>Take your project to the moon!</h1>
-                <p style="max-width: 500px;">The final step is launching your project. We’ll deploy it seamlessly, making sure everything runs smoothly from day one.</p>
-            </div>
-            <div id="controlBtns" class="disabled">
-                <button class="controls testing disabled" id="prev" #prev style="opacity: 0;" (click)="previousPlanet()">Back</button>
-                <button class="controls testing2 disabled" id="next" #next style="opacity: 0;" (click)="nextPlanet()">Next</button>
-            </div>
-            <div #labelContainer style="position: relative;"></div>
-            <canvas #mainCanvas (pointermove)="onPointerMove($event)" (click)="onPointerClick()" style="position: relative;">
-                  
-            </canvas>
-            
-            <div #loadingBar id="loadingBar" style="width:300px;display:flex;flex-direction:column;align-items:center;gap:12px;padding:28px 24px;background:rgba(10,2,20,0.85);border:1px solid rgba(139,92,246,0.22);border-radius:18px;backdrop-filter:blur(16px);box-shadow:0 0 60px -10px rgba(139,92,246,0.28),0 0 0 1px rgba(139,92,246,0.07);">
-              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8b5cf6;letter-spacing:0.22em;text-transform:uppercase;">Initialising scene</div>
-              <div style="position:relative;width:100%;height:3px;background:rgba(255,255,255,0.1);border-radius:999px;">
-                <div #loadingFill id="loadingFill" style="position:absolute;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#6366f1,#8b5cf6,#a78bfa);border-radius:999px;transition:width 0.3s ease;"></div>
-              </div>
-              <span #loadingLabel id="loadingLabel" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8478a0;letter-spacing:0.1em;">Loading…</span>
-            </div>
-            
-            <button id="reset" class="disabled" #reset (click)="resetCamera()" class="testing3" style="opacity: 0"><span class="glow">X</span></button>
+            <h2 style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;color:#f3eefa;letter-spacing:-0.01em;margin:0 0 8px;">Questions first</h2>
+            <p style="font-family:'Inter',sans-serif;font-size:12.5px;color:#b8aece;line-height:1.65;margin:0;">Planets don't just appear. They form from chaos and debris. We start by figuring out what you're actually orbiting around. Half the time the original idea shifts. That's the job.</p>
         </div>
     </div>
+
+    <div id="label2" class="disabled" #label2 style="pointer-events:none;opacity:0;transition:opacity 1s ease;width:360px;">
+        <div class="label-inner" style="padding:20px 24px;background:rgba(6,1,14,0.36);border:1px solid rgba(139,92,246,0.25);border-radius:14px;backdrop-filter:blur(28px);box-shadow:0 0 40px -12px rgba(139,92,246,0.35),inset 0 1px 0 rgba(167,139,250,0.1),inset 3px 0 0 rgba(139,92,246,0.5);position:relative;overflow:hidden;">
+            <div class="label-scan"></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                <span style="width:5px;height:5px;border-radius:50%;background:#8b5cf6;box-shadow:0 0 6px #8b5cf6;flex-shrink:0;display:inline-block;"></span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8b5cf6;letter-spacing:0.2em;text-transform:uppercase;">02 · Design</span>
+            </div>
+            <h2 style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;color:#f3eefa;letter-spacing:-0.01em;margin:0 0 8px;">Sketch &amp; system</h2>
+            <p style="font-family:'Inter',sans-serif;font-size:12.5px;color:#b8aece;line-height:1.65;margin:0;">Maps before missions. We chart the flow before we give it atmosphere. A polished screenshot nobody can navigate is just a gas giant. Looks impressive, impossible to land on.</p>
+        </div>
+    </div>
+
+    <div id="label3" class="disabled" #label3 style="pointer-events:none;opacity:0;transition:opacity 1s ease;width:360px;">
+        <div class="label-inner" style="padding:20px 24px;background:rgba(6,1,14,0.36);border:1px solid rgba(139,92,246,0.25);border-radius:14px;backdrop-filter:blur(28px);box-shadow:0 0 40px -12px rgba(139,92,246,0.35),inset 0 1px 0 rgba(167,139,250,0.1),inset 3px 0 0 rgba(139,92,246,0.5);position:relative;overflow:hidden;">
+            <div class="label-scan"></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                <span style="width:5px;height:5px;border-radius:50%;background:#8b5cf6;box-shadow:0 0 6px #8b5cf6;flex-shrink:0;display:inline-block;"></span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8b5cf6;letter-spacing:0.2em;text-transform:uppercase;">03 · Build</span>
+            </div>
+            <h2 style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;color:#f3eefa;letter-spacing:-0.01em;margin:0 0 8px;">Two-week loops</h2>
+            <p style="font-family:'Inter',sans-serif;font-size:12.5px;color:#b8aece;line-height:1.65;margin:0;">We don't disappear into a development nebula for months. Real deployed progress every check-in, no "it'll be done when it's done." The orbit is visible from the ground.</p>
+        </div>
+    </div>
+
+    <div id="label4" class="disabled" #label4 style="pointer-events:none;opacity:0;transition:opacity 1s ease;width:360px;">
+        <div class="label-inner" style="padding:20px 24px;background:rgba(6,1,14,0.36);border:1px solid rgba(139,92,246,0.25);border-radius:14px;backdrop-filter:blur(28px);box-shadow:0 0 40px -12px rgba(139,92,246,0.35),inset 0 1px 0 rgba(167,139,250,0.1),inset 3px 0 0 rgba(139,92,246,0.5);position:relative;overflow:hidden;">
+            <div class="label-scan"></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                <span style="width:5px;height:5px;border-radius:50%;background:#8b5cf6;box-shadow:0 0 6px #8b5cf6;flex-shrink:0;display:inline-block;"></span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8b5cf6;letter-spacing:0.2em;text-transform:uppercase;">04 · Launch</span>
+            </div>
+            <h2 style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;color:#f3eefa;letter-spacing:-0.01em;margin:0 0 8px;">Soft, then loud</h2>
+            <p style="font-family:'Inter',sans-serif;font-size:12.5px;color:#b8aece;line-height:1.65;margin:0;">Re-entry is the most dangerous part of any mission. We test, fix, and soft-launch before amplifying. We don't hand you the heat shield and wave goodbye from orbit.</p>
+        </div>
+    </div>
+
+    <div id="label5" class="disabled" #label5 style="pointer-events:none;opacity:0;transition:opacity 1s ease;width:360px;">
+        <div class="label-inner" style="padding:20px 24px;background:rgba(6,1,14,0.36);border:1px solid rgba(139,92,246,0.25);border-radius:14px;backdrop-filter:blur(28px);box-shadow:0 0 40px -12px rgba(139,92,246,0.35),inset 0 1px 0 rgba(167,139,250,0.1),inset 3px 0 0 rgba(139,92,246,0.5);position:relative;overflow:hidden;">
+            <div class="label-scan"></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                <span style="width:5px;height:5px;border-radius:50%;background:#8b5cf6;box-shadow:0 0 6px #8b5cf6;flex-shrink:0;display:inline-block;"></span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8b5cf6;letter-spacing:0.2em;text-transform:uppercase;">05 · Orbit</span>
+            </div>
+            <h2 style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;color:#f3eefa;letter-spacing:-0.01em;margin:0 0 8px;">We stick around</h2>
+            <p style="font-family:'Inter',sans-serif;font-size:12.5px;color:#b8aece;line-height:1.65;margin:0;">The moon's been at this for 4.5 billion years. We're not that committed, but we stay close. Most of our best work happens in the first year after launch, when it starts to matter.</p>
+        </div>
+    </div>
+
+    <!-- Nav buttons -->
+    <button class="disabled" id="prev" #prev
+        style="opacity:0;background:transparent;border:1px solid rgba(139,92,246,0.35);color:#a78bfa;padding:8px 22px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;border-radius:999px;cursor:pointer;outline:none;"
+        (click)="previousPlanet()">← Back</button>
+    <button class="disabled" id="next" #next
+        style="opacity:0;background:transparent;border:1px solid rgba(139,92,246,0.35);color:#a78bfa;padding:8px 22px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;border-radius:999px;cursor:pointer;outline:none;"
+        (click)="nextPlanet()">Next →</button>
+
+    <!-- Reset button -->
+    <button id="reset" class="disabled" #reset
+        style="opacity:0;background:transparent;border:1px solid rgba(139,92,246,0.22);color:#8478a0;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:16px;outline:none;padding:0;line-height:1;"
+        (click)="resetCamera()">×</button>
+
+    <!-- Secret planet discovery card -->
+    <div #secretLabel class="disabled" style="pointer-events:none;opacity:0;transition:opacity 1.5s ease;width:340px;">
+        <div class="label-inner" style="padding:20px 24px;background:rgba(20,4,38,0.52);border:1px solid rgba(147,51,234,0.4);border-radius:14px;backdrop-filter:blur(28px);box-shadow:0 0 50px -8px rgba(147,51,234,0.55),inset 0 1px 0 rgba(196,139,250,0.15),inset 3px 0 0 rgba(147,51,234,0.65);position:relative;overflow:hidden;">
+            <div class="label-scan"></div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+                <span style="width:5px;height:5px;border-radius:50%;background:#9333ea;box-shadow:0 0 8px #9333ea;flex-shrink:0;display:inline-block;"></span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9333ea;letter-spacing:0.2em;text-transform:uppercase;">∷ Signal Detected ∷</span>
+            </div>
+            <h2 style="font-family:'Montserrat',sans-serif;font-weight:600;font-size:15px;color:#f3eefa;letter-spacing:-0.01em;margin:0 0 8px;">First contact.</h2>
+            <p style="font-family:'Inter',sans-serif;font-size:12.5px;color:#c4a8e8;line-height:1.65;margin:0;">You pushed past the edge of the map. Most people don't. Neither do most agencies. If this is how you explore, let's build something.</p>
+        </div>
+    </div>
+
+    <div #labelContainer style="position: relative;"></div>
+    <canvas #mainCanvas (click)="onPointerClick()" style="position: relative;"></canvas>
+
+    <!-- Loading screen -->
+    <div #loadingBar id="loadingBar" style="width:300px;display:flex;flex-direction:column;align-items:center;gap:12px;padding:28px 24px;background:rgba(10,2,20,0.85);border:1px solid rgba(139,92,246,0.22);border-radius:18px;backdrop-filter:blur(16px);box-shadow:0 0 60px -10px rgba(139,92,246,0.28),0 0 0 1px rgba(139,92,246,0.07);">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8b5cf6;letter-spacing:0.22em;text-transform:uppercase;">Initialising scene</div>
+        <div style="position:relative;width:100%;height:3px;background:rgba(255,255,255,0.1);border-radius:999px;">
+            <div #loadingFill id="loadingFill" style="position:absolute;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#6366f1,#8b5cf6,#a78bfa);border-radius:999px;transition:width 0.3s ease;"></div>
+        </div>
+        <span #loadingLabel id="loadingLabel" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#8478a0;letter-spacing:0.1em;">Loading…</span>
+    </div>
+
 </div>
-
-
