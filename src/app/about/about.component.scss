@@ -34,6 +34,11 @@
   overflow: hidden;
   padding: 40px;
   aspect-ratio: 4 / 5;
+
+  @media (max-width: 1028px) {
+    aspect-ratio: auto;
+    padding: 32px;
+  }
   background:
     radial-gradient(120% 80% at 20% 0%, rgba(139, 92, 246, 0.22), transparent 55%),
     radial-gradient(80% 60% at 100% 100%, rgba(99, 102, 241, 0.15), transparent 60%),

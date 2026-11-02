@@ -1,3 +1,12 @@
+// Self-hosted fonts — eliminates Google Fonts round trips
+@import '@fontsource/montserrat/500.css';
+@import '@fontsource/montserrat/600.css';
+@import '@fontsource/montserrat/700.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/jetbrains-mono/400.css';
+
 @import "app/variables.scss";
 @import "bootstrap/scss/bootstrap-grid";
 @import "bootstrap/scss/bootstrap-reboot";
